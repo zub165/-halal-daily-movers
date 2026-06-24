@@ -1,4 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  initPriceState,
+  refreshPrices,
+  getSnapshot,
+  getPriceSource,
+} from "./services/priceService";
 
 // ── Halal-screened universe (AAOIFI-aligned, Shariah-compliant) ────────────────
 const HALAL_UNIVERSE = [
@@ -44,45 +50,8 @@ const HALAL_UNIVERSE = [
   { ticker: "ENPH",  name: "Enphase Energy",            sector: "Clean Energy" },
 ];
 
-// ── Simulated live price engine ───────────────────────────────────────────────
-function seedPrice(ticker) {
-  const seeds = {
-    AAPL:195, MSFT:415, AVGO:185, AMD:145, NVDA:135, MU:108,
-    MRVL:78, QCOM:165, AMZN:215, GOOGL:178, META:525, TSM:175,
-    ASML:860, AMAT:210, LRCX:890, ON:68, TXN:198, KLAC:780,
-    PANW:325, CRWD:380, ZS:215, FTNT:89, NOW:870, CRM:295,
-    SNOW:178, DDOG:125, NET:115, UBER:85, LYFT:16, LLY:895,
-    ABBV:188, TMO:545, ISRG:490, ELV:380, DE:420, CAT:365,
-    RTX:125, HON:222, NEE:78, ENPH:68,
-  };
-  return seeds[ticker] ?? 100;
-}
-
-const priceState = {};
-HALAL_UNIVERSE.forEach(({ ticker }) => {
-  const base = seedPrice(ticker);
-  priceState[ticker] = {
-    price: base * (1 + (Math.random() - 0.5) * 0.04),
-    open: base,
-  };
-});
-
-function tickPrices() {
-  HALAL_UNIVERSE.forEach(({ ticker }) => {
-    const s = priceState[ticker];
-    const move = (Math.random() - 0.49) * 0.004;   // slight upward drift
-    s.price = Math.max(0.01, s.price * (1 + move));
-  });
-}
-
-function getSnapshot() {
-  return HALAL_UNIVERSE.map(({ ticker, name, sector }) => {
-    const { price, open } = priceState[ticker];
-    const change = price - open;
-    const changePct = (change / open) * 100;
-    return { ticker, name, sector, price, open, change, changePct };
-  });
-}
+const TICKERS = HALAL_UNIVERSE.map((s) => s.ticker);
+initPriceState(TICKERS);
 
 // ── Signal logic ──────────────────────────────────────────────────────────────
 function getSignal(changePct) {
@@ -232,7 +201,7 @@ function SummaryCard({ label, value, sub, accent }) {
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function HalalMovers() {
-  const [stocks, setStocks] = useState(() => getSnapshot());
+  const [stocks, setStocks] = useState(() => getSnapshot(HALAL_UNIVERSE));
   const [filter, setFilter] = useState("ALL");          // ALL | BUY | SELL | HOLD
   const [sort, setSort] = useState("changePct");        // changePct | price | ticker
   const [sortDir, setSortDir] = useState("desc");
@@ -240,26 +209,44 @@ export default function HalalMovers() {
   const [flashSet, setFlashSet] = useState(new Set());
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [countdown, setCountdown] = useState(60);
+  const [loading, setLoading] = useState(false);
+  const [priceError, setPriceError] = useState(null);
+  const [priceSource, setPriceSource] = useState(() => getPriceSource());
   const prevPrices = useRef({});
   const countdownRef = useRef(60);
+  const refreshInFlight = useRef(false);
 
-  const refresh = useCallback(() => {
-    tickPrices();
-    const snap = getSnapshot();
-    const flashed = new Set();
-    snap.forEach(s => {
-      const prev = prevPrices.current[s.ticker];
-      if (prev !== undefined && Math.abs(s.price - prev) / prev > 0.001) {
-        flashed.add(s.ticker);
-      }
-      prevPrices.current[s.ticker] = s.price;
-    });
-    setStocks(snap);
-    setFlashSet(flashed);
-    setLastUpdate(new Date());
-    countdownRef.current = 60;
-    setCountdown(60);
-    setTimeout(() => setFlashSet(new Set()), 800);
+  const refresh = useCallback(async () => {
+    if (refreshInFlight.current) return;
+    refreshInFlight.current = true;
+    setLoading(true);
+    setPriceError(null);
+
+    try {
+      const result = await refreshPrices(TICKERS);
+      const snap = getSnapshot(HALAL_UNIVERSE);
+      const flashed = new Set();
+      snap.forEach((s) => {
+        const prev = prevPrices.current[s.ticker];
+        if (prev !== undefined && Math.abs(s.price - prev) / prev > 0.001) {
+          flashed.add(s.ticker);
+        }
+        prevPrices.current[s.ticker] = s.price;
+      });
+      setStocks(snap);
+      setFlashSet(flashed);
+      setLastUpdate(new Date());
+      setPriceSource(result.source);
+      countdownRef.current = 60;
+      setCountdown(60);
+      setTimeout(() => setFlashSet(new Set()), 800);
+    } catch (err) {
+      setPriceError(err?.message ?? "Failed to fetch live prices");
+      setStocks(getSnapshot(HALAL_UNIVERSE));
+    } finally {
+      setLoading(false);
+      refreshInFlight.current = false;
+    }
   }, []);
 
   // 60-second auto-refresh
@@ -351,7 +338,7 @@ export default function HalalMovers() {
               Halal Daily Movers
             </div>
             <div style={{ fontSize: 11, color: "#78716c", marginTop: 1 }}>
-              AAOIFI-Screened · Shariah Compliant · {HALAL_UNIVERSE.length} Stocks
+              AAOIFI-Screened · {HALAL_UNIVERSE.length} Stocks · {priceSource === "yahoo" ? "Yahoo Finance" : priceSource === "alphavantage" ? "Alpha Vantage" : priceSource === "polygon" ? "Polygon.io" : priceSource === "simulated" ? "Simulated" : "Cached"}
             </div>
           </div>
         </div>
@@ -365,30 +352,33 @@ export default function HalalMovers() {
               boxShadow: "0 0 6px #34d399",
               animation: "pulse 1.5s infinite",
             }} />
-            <span style={{ color: "#34d399", fontSize: 11, fontWeight: 700 }}>LIVE</span>
+            <span style={{ color: loading ? "#fbbf24" : "#34d399", fontSize: 11, fontWeight: 700 }}>
+              {loading ? "SYNC" : "LIVE"}
+            </span>
           </div>
           <div style={{ textAlign: "right" }}>
             <div style={{ color: "#a8a29e", fontSize: 11 }}>
               Updated {fmtTime(lastUpdate)}
             </div>
-            <div style={{ color: "#57534e", fontSize: 10 }}>
-              Next refresh in {countdown}s
+            <div style={{ color: priceError ? "#f87171" : "#57534e", fontSize: 10 }}>
+              {priceError ? "Using cache — retrying soon" : `Next refresh in ${countdown}s`}
             </div>
           </div>
           <button
             onClick={refresh}
+            disabled={loading}
             style={{
               background: "#292524",
               border: "1px solid #44403c",
-              color: "#fafaf9",
+              color: loading ? "#78716c" : "#fafaf9",
               borderRadius: 6,
               padding: "6px 14px",
               fontSize: 12,
-              cursor: "pointer",
+              cursor: loading ? "wait" : "pointer",
               fontWeight: 600,
             }}
           >
-            ↻ Refresh
+            {loading ? "…" : "↻ Refresh"}
           </button>
         </div>
       </div>

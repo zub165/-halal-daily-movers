@@ -21,21 +21,21 @@
 ## Deploy to GitHub Pages
 
 ### One-time setup
-1. Create a new GitHub repo named `halal-daily-movers`
-2. Edit `vite.config.js` — set `base` to `'/<your-repo-name>/'`
+1. Repo: [zub165/-halal-daily-movers](https://github.com/zub165/-halal-daily-movers)
+2. `vite.config.js` uses `base: '/-halal-daily-movers/'`
 3. In repo Settings → Pages → set Source to **GitHub Actions**
 
 ### Push code
 ```bash
 git init
-git remote add origin https://github.com/<YOUR_USERNAME>/halal-daily-movers.git
+git remote add origin https://github.com/zub165/-halal-daily-movers.git
 git add .
-git commit -m "🌙 Initial deploy: Halal Daily Movers"
+git commit -m "Initial deploy: Halal Daily Movers"
 git push -u origin main
 ```
 
 The GitHub Actions workflow auto-builds and deploys on every push to `main`.
-Live URL: `https://<YOUR_USERNAME>.github.io/halal-daily-movers/`
+Live URL: `https://zub165.github.io/-halal-daily-movers/`
 
 ## Local Development
 ```bash

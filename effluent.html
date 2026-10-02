@@ -7,14 +7,19 @@
     <title>Effluent · CRRT Calculators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="wrap">
+      <div class="page-kicker">Calculator 02</div>
       <h1 class="page-title">Effluent by modality</h1>
       <p class="page-lead">Build total effluent for CVVH, CVVHD, or CVVHDF from replacement, dialysate, fluid removal, and PBP rates.</p>
       <div class="calc-layout">
         <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
           <div class="form-grid">
             <div class="field">
               <label for="modality">Modality</label>
@@ -58,6 +63,7 @@
           </div>
         </form>
         <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
           <div class="result-block">
             <div class="k">Effluent rate</div>
             <div class="v" id="out-qe">—</div>

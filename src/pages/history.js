@@ -14,13 +14,11 @@ const empty = document.getElementById("empty");
 async function refresh() {
   const items = await listCalculations();
   const online = await getBackendStatus();
-  const sync = document.getElementById("sync-status");
-  if (sync) {
+  document.querySelectorAll("[data-sync]").forEach((sync) => {
     sync.classList.toggle("online", online);
-    sync.querySelector(".label").textContent = online
-      ? "Backend synced"
-      : "Local storage";
-  }
+    const label = sync.querySelector(".label");
+    if (label) label.textContent = online ? "Backend synced" : "Local storage";
+  });
 
   tbody.innerHTML = "";
   if (!items.length) {
@@ -38,7 +36,7 @@ async function refresh() {
       )}</div></td>
       <td>${escapeHtml(summary)}</td>
       <td>${escapeHtml(when)}</td>
-      <td><button class="btn btn-ghost" data-del="${escapeHtml(item.id)}">Delete</button></td>
+      <td><button class="btn btn-ghost btn-sm" data-del="${escapeHtml(item.id)}">Delete</button></td>
     `;
     tbody.appendChild(tr);
   }

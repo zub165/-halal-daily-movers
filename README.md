@@ -2,7 +2,7 @@
 
 Clinical reference calculators for Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.0.0** — educational / protocol-support tool only. Not a medical device.
+**Version 2.1.0** — modern HTML + JavaScript UI. Educational / protocol-support tool only. Not a medical device.
 
 ## Calculators (separate HTML pages)
 | Page | Purpose |

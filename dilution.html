@@ -7,14 +7,19 @@
     <title>Dilution Dose · CRRT Calculators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="wrap">
+      <div class="page-kicker">Calculator 04</div>
       <h1 class="page-title">Dilution-corrected dose</h1>
       <p class="page-lead">When using pre-filter replacement or PBP fluid, multiply prescribed dose by the dilution factor to estimate effective clearance.</p>
       <div class="calc-layout">
         <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
           <div class="form-grid">
             <div class="field">
               <label for="modality">Modality</label>
@@ -66,6 +71,7 @@
           </div>
         </form>
         <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
           <div class="result-block">
             <div class="k">Prescribed dose</div>
             <div class="v" id="out-prescribed">—</div>

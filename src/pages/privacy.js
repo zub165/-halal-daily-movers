@@ -1,14 +1,7 @@
 import { mountShell, showToast } from "../shared/ui.js";
-import { exportAllData, wipeAllUserData, getBackendStatus } from "../shared/storage.js";
+import { exportAllData, wipeAllUserData } from "../shared/storage.js";
 
 mountShell({ active: "privacy", title: "Privacy" });
-
-getBackendStatus().then((ok) => {
-  const sync = document.getElementById("sync-status");
-  if (!sync) return;
-  sync.classList.toggle("online", ok);
-  sync.querySelector(".label").textContent = ok ? "Backend reachable" : "Local only";
-});
 
 document.getElementById("btn-export").addEventListener("click", async () => {
   const data = await exportAllData();

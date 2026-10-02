@@ -14,7 +14,6 @@ const PAGES = [
 ];
 
 function basePath() {
-  // Vite base for GitHub Pages
   const b = import.meta.env.BASE_URL || "/";
   return b.endsWith("/") ? b : `${b}/`;
 }
@@ -30,7 +29,10 @@ export function mountShell({ active, title }) {
   header.className = "site-header";
   header.innerHTML = `
     <div class="site-header__inner">
-      <a class="brand" href="${pageUrl("index.html")}">CRRT <span>Calculators</span></a>
+      <a class="brand" href="${pageUrl("index.html")}">
+        <span class="brand__mark" aria-hidden="true">⊕</span>
+        <span class="brand__text">CRRT Calculators<span>ICU reference toolkit</span></span>
+      </a>
       <nav class="nav" aria-label="Primary">
         ${PAGES.map(
           (p) =>
@@ -45,7 +47,10 @@ export function mountShell({ active, title }) {
   mobile.className = "mobile-nav";
   mobile.setAttribute("aria-label", "Mobile");
   mobile.innerHTML = PAGES.filter((p) => p.id !== "privacy")
-    .map((p) => `<a href="${pageUrl(p.href)}" ${p.id === active ? 'aria-current="page"' : ""}>${p.label}</a>`)
+    .map(
+      (p) =>
+        `<a href="${pageUrl(p.href)}" ${p.id === active ? 'aria-current="page"' : ""}>${p.label}</a>`
+    )
     .join("");
 
   const wrap = document.querySelector(".wrap");
@@ -54,7 +59,7 @@ export function mountShell({ active, title }) {
   const footer = document.createElement("footer");
   footer.className = "footer";
   footer.innerHTML = `
-    <span>v${import.meta.env.VITE_APP_VERSION || "2.0.0"} · Educational reference only</span>
+    <span>v${import.meta.env.VITE_APP_VERSION || "2.1.0"} · HTML + JavaScript · Educational reference only</span>
     <span><a href="${pageUrl("privacy.html")}">Privacy</a> · Hybrid local + backend storage</span>
   `;
   document.body.appendChild(footer);
@@ -64,13 +69,13 @@ export function mountShell({ active, title }) {
   toast.id = "toast";
   document.body.appendChild(toast);
 
-  const sync = document.getElementById("sync-status");
-  if (sync) {
+  document.querySelectorAll("[data-sync]").forEach((sync) => {
     getBackendStatus().then((ok) => {
       sync.classList.toggle("online", ok);
-      sync.querySelector(".label").textContent = ok ? "Backend synced" : "Local only";
+      const label = sync.querySelector(".label");
+      if (label) label.textContent = ok ? "Backend synced" : "Local only";
     });
-  }
+  });
 }
 
 export function showToast(message) {

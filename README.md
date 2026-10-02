@@ -1,60 +1,54 @@
-# ☽ Halal Daily Movers
+# CRRT Calculators
 
-> Shariah-compliant stock screener with real-time signals. AAOIFI-aligned.
+Clinical reference calculators for Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-## Features
-- 40 AAOIFI-screened halal stocks (semiconductors, tech, healthcare, clean energy)
-- Auto-refreshes every 60 seconds with live price simulation
-- BUY / SELL / STRONG signals based on intraday % change
-- Filter by signal, sort by price or change, full-text search
-- Dark Islamic aesthetic with crescent moon motif
+**Version 2.0.0** — educational / protocol-support tool only. Not a medical device.
 
-## Signal Logic
-| Signal | Threshold |
-|--------|-----------|
-| STRONG BUY | ≥ +2.5% |
-| BUY | ≥ +0.8% |
-| HOLD | −0.8% to +0.8% |
-| SELL | ≤ −0.8% |
-| STRONG SELL | ≤ −2.5% |
+## Calculators (separate HTML pages)
+| Page | Purpose |
+|------|---------|
+| `index.html` | Hub |
+| `dose.html` | Dose = effluent ÷ weight |
+| `effluent.html` | Modality effluent + dose |
+| `filtration.html` | Filtration fraction |
+| `dilution.html` | Dilution-corrected dose |
+| `citrate.html` | Citrate rate & Ca ratio |
+| `fluid.html` | Net fluid balance |
+| `history.html` | Saved calculations |
+| `privacy.html` | Privacy policy + delete/export |
 
-## Deploy to GitHub Pages
+## Hybrid storage
+- **Local:** `localStorage` (`crrt_calculations_v1`)
+- **Backend:** SQLite via Express API on **port 3851**
+- Schema matches frontend records: `id`, `type`, `inputs` (JSON), `results` (JSON), `label`, `created_at`, `updated_at`
 
-### One-time setup
-1. Repo: [zub165/-halal-daily-movers](https://github.com/zub165/-halal-daily-movers)
-2. `vite.config.js` uses `base: '/-halal-daily-movers/'`
-3. In repo Settings → Pages → set Source to **GitHub Actions**
+## Ports
+| Service | Port |
+|---------|------|
+| Vite web | **5174** |
+| API / SQLite | **3851** |
+| Vite preview | **4174** |
 
-### Push code
-```bash
-git init
-git remote add origin https://github.com/zub165/-halal-daily-movers.git
-git add .
-git commit -m "Initial deploy: Halal Daily Movers"
-git push -u origin main
-```
-
-The GitHub Actions workflow auto-builds and deploys on every push to `main`.
-Live URL: `https://zub165.github.io/-halal-daily-movers/`
-
-## Local Development
+## Local development
 ```bash
 npm install
 npm run dev
 ```
+- App: http://127.0.0.1:5174/-halal-daily-movers/
+- API health: http://127.0.0.1:3851/api/health
 
-## Real Data Integration
-To connect live prices, replace the `tickPrices()` / `getSnapshot()` functions with calls to:
-- **Yahoo Finance** (unofficial): `https://query1.finance.yahoo.com/v8/finance/chart/AAPL`
-- **Alpha Vantage** (free tier): `https://www.alphavantage.co/`
-- **Polygon.io** (real-time, paid): `https://polygon.io/`
+```bash
+npm test
+npm run build
+```
 
-## Halal Screening
-Stocks are pre-screened per AAOIFI FAS 21 standards, excluding:
-- Conventional banking / finance / insurance
-- Alcohol, tobacco, pork-related
-- Weapons & defense
-- Entertainment haram sectors (adult content, gambling)
+## Privacy & deletion
+Privacy page supports JSON export and permanent wipe of local + backend data (App Store / Play Store readiness).
 
----
-*Built for SadaqaWorks / Malik's halal investing toolkit*
+## Deploy (GitHub Pages)
+Workflow builds static pages to `dist/`. Backend is optional for production static hosting (local-only mode).
+
+Live path base: `/-halal-daily-movers/`
+
+## Disclaimer
+Verify all prescriptions against institutional CRRT protocols. Do not enter PHI.

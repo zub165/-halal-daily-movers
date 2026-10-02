@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Fluid Balance · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Fluid balance</h1>
+      <p class="page-lead">Track intake, output, and CRRT removal for net balance. Optionally derive target effluent from dose × weight.</p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="field">
+              <label for="intake">Intake (mL)</label>
+              <input id="intake" type="number" min="0" step="1" value="2400" />
+            </div>
+            <div class="field">
+              <label for="output">Non-CRRT output (mL)</label>
+              <input id="output" type="number" min="0" step="1" value="800" />
+            </div>
+            <div class="field">
+              <label for="removal">CRRT removal (mL)</label>
+              <input id="removal" type="number" min="0" step="1" value="2000" />
+            </div>
+            <div class="field">
+              <label for="hours">Period (hours)</label>
+              <input id="hours" type="number" min="1" step="1" value="24" />
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg)</label>
+              <input id="weight" type="number" min="1" step="0.1" value="80" />
+            </div>
+            <div class="field">
+              <label for="target_dose">Target dose (mL/kg/h)</label>
+              <input id="target_dose" type="number" min="0" step="0.1" value="25" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="result-block">
+            <div class="k">Net balance</div>
+            <div class="v" id="out-net">—</div>
+            <div class="hint" id="out-net-hint"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">CRRT removal rate</div>
+            <div class="v" id="out-rate">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Target effluent (dose × wt)</div>
+            <div class="v" id="out-qe">—</div>
+          </div>
+        </div>
+      </div>
+      <aside class="disclaimer">Educational reference only. Confirm with institutional protocol.</aside>
+    </main>
+    <script type="module" src="/src/pages/fluid.js"></script>
+  </body>
+</html>

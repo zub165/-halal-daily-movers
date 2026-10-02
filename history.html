@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>History · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Saved calculations</h1>
+      <p class="page-lead">Hybrid storage: browser localStorage plus SQLite backend when the API is running.</p>
+      <p style="margin-bottom:1rem">
+        <span class="sync-pill" id="sync-status"><span class="dot"></span><span class="label">Checking…</span></span>
+      </p>
+      <div class="panel">
+        <div class="actions" style="margin-top:0;margin-bottom:1rem">
+          <button type="button" class="btn btn-danger" id="btn-clear">Delete all</button>
+          <button type="button" class="btn btn-ghost" id="btn-privacy">Privacy &amp; data rights</button>
+        </div>
+        <p id="empty" class="tone-muted" hidden>No saved calculations yet.</p>
+        <div style="overflow-x:auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Summary</th>
+                <th>When</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/src/pages/history.js"></script>
+  </body>
+</html>

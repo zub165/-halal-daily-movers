@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Dilution Dose · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Dilution-corrected dose</h1>
+      <p class="page-lead">When using pre-filter replacement or PBP fluid, multiply prescribed dose by the dilution factor to estimate effective clearance.</p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="field">
+              <label for="modality">Modality</label>
+              <select id="modality">
+                <option value="CVVH" selected>CVVH</option>
+                <option value="CVVHD">CVVHD</option>
+                <option value="CVVHDF">CVVHDF</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg)</label>
+              <input id="weight" type="number" min="1" step="0.1" value="100" />
+            </div>
+            <div class="field">
+              <label for="bfr">Blood flow (mL/min)</label>
+              <input id="bfr" type="number" min="1" step="1" value="200" />
+            </div>
+            <div class="field">
+              <label for="hct">Hematocrit (%)</label>
+              <input id="hct" type="number" min="1" max="70" step="0.1" value="30" />
+            </div>
+            <div class="field">
+              <label for="pre">Pre-filter RF (mL/h)</label>
+              <input id="pre" type="number" min="0" step="1" value="2000" />
+            </div>
+            <div class="field">
+              <label for="post">Post-filter RF (mL/h)</label>
+              <input id="post" type="number" min="0" step="1" value="200" />
+            </div>
+            <div class="field">
+              <label for="removal">Fluid removal (mL/h)</label>
+              <input id="removal" type="number" min="0" step="1" value="200" />
+            </div>
+            <div class="field">
+              <label for="pbp">PBP / ACD-A (mL/h)</label>
+              <input id="pbp" type="number" min="0" step="1" value="300" />
+            </div>
+            <div class="field">
+              <label for="dialysate">Dialysate (mL/h)</label>
+              <input id="dialysate" type="number" min="0" step="1" value="0" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="result-block">
+            <div class="k">Prescribed dose</div>
+            <div class="v" id="out-prescribed">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Dilution factor</div>
+            <div class="v" id="out-dilution">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Corrected dose</div>
+            <div class="v" id="out-corrected">—</div>
+            <div class="hint" id="out-corrected-hint"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="disclaimer">Educational reference only. Confirm with institutional protocol.</aside>
+    </main>
+    <script type="module" src="/src/pages/dilution.js"></script>
+  </body>
+</html>

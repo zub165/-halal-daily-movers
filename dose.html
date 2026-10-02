@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Dose · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Dose calculator</h1>
+      <p class="page-lead">Dose = effluent rate (mL/h) ÷ patient weight (kg). Delivered target is commonly 20–25 mL/kg/h; prescribe ~25–30 to allow downtime.</p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="field">
+              <label for="effluent">Effluent rate (mL/h)</label>
+              <input id="effluent" type="number" min="0" step="1" value="2500" />
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg)</label>
+              <input id="weight" type="number" min="1" step="0.1" value="80" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" placeholder="e.g. Bed 4 AM prescription" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="result-block">
+            <div class="k">Prescribed dose</div>
+            <div class="v" id="out-dose">—</div>
+            <div class="hint" id="out-dose-hint"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="disclaimer">Educational reference only. Confirm with institutional protocol.</aside>
+    </main>
+    <script type="module" src="/src/pages/dose.js"></script>
+  </body>
+</html>

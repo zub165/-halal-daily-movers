@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Privacy · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Privacy policy</h1>
+      <p class="page-lead">How CRRT Calculators handles data on this device and optional backend.</p>
+      <p style="margin-bottom:1rem">
+        <span class="sync-pill" id="sync-status"><span class="dot"></span><span class="label">Checking…</span></span>
+      </p>
+
+      <div class="panel" style="display:grid;gap:1rem">
+        <section>
+          <h2 style="font-family:var(--font-display);font-size:1.25rem;margin-bottom:0.35rem">What we store</h2>
+          <p class="tone-muted">Saved calculator inputs/results and optional labels. No account system. Data stays in your browser localStorage and, when the API is running, in a local SQLite database on the server host.</p>
+        </section>
+        <section>
+          <h2 style="font-family:var(--font-display);font-size:1.25rem;margin-bottom:0.35rem">What we do not collect</h2>
+          <p class="tone-muted">We do not sell data, run advertising trackers, or require patient identifiers. Avoid entering PHI (names, MRNs, DOB). Use bed labels only if your policy allows.</p>
+        </section>
+        <section>
+          <h2 style="font-family:var(--font-display);font-size:1.25rem;margin-bottom:0.35rem">HTTPS</h2>
+          <p class="tone-muted">Pages request HTTPS via Content-Security-Policy upgrade-insecure-requests. Local development may use http://127.0.0.1 for the Vite app (port 5174) and API (port 3851).</p>
+        </section>
+        <section>
+          <h2 style="font-family:var(--font-display);font-size:1.25rem;margin-bottom:0.35rem">Your rights</h2>
+          <p class="tone-muted">Export a JSON copy of your data, or permanently delete everything from this browser and the backend database.</p>
+        </section>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btn-export">Export my data</button>
+          <button type="button" class="btn btn-danger" id="btn-wipe">Delete all my data</button>
+        </div>
+      </div>
+      <aside class="disclaimer">This tool is for educational / clinical reference. Not a medical device. Not for store submission claims of diagnosis or treatment.</aside>
+    </main>
+    <script type="module" src="/src/pages/privacy.js"></script>
+  </body>
+</html>

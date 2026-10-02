@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Citrate · CRRT Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1 class="page-title">Citrate &amp; calcium</h1>
+      <p class="page-lead">Suggest ACD-A rate from blood flow × ratio, estimate circuit citrate concentration, and check total calcium : systemic iCa for accumulation.</p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="field">
+              <label for="bfr">Blood flow (mL/min)</label>
+              <input id="bfr" type="number" min="1" step="1" value="150" />
+            </div>
+            <div class="field">
+              <label for="ratio">Citrate:BFR ratio</label>
+              <input id="ratio" type="number" min="0.5" max="3" step="0.1" value="1.5" />
+            </div>
+            <div class="field">
+              <label for="citrate">Citrate rate (mL/h)</label>
+              <input id="citrate" type="number" min="0" step="1" value="225" />
+            </div>
+            <div class="field">
+              <label for="circuit_ica">Circuit iCa (mmol/L)</label>
+              <input id="circuit_ica" type="number" min="0" step="0.01" value="0.35" />
+            </div>
+            <div class="field">
+              <label for="systemic_ica">Systemic iCa (mmol/L)</label>
+              <input id="systemic_ica" type="number" min="0" step="0.01" value="1.15" />
+            </div>
+            <div class="field">
+              <label for="total_ca">Total Ca (mmol/L)</label>
+              <input id="total_ca" type="number" min="0" step="0.01" value="2.4" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-ghost" id="btn-fill">Fill suggested rate</button>
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="result-block">
+            <div class="k">Suggested citrate</div>
+            <div class="v" id="out-suggest">—</div>
+            <div class="hint tone-muted">Common starting band ~1–2 × BFR (protocol-specific)</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Est. circuit citrate</div>
+            <div class="v" id="out-conc">—</div>
+            <div class="hint" id="out-circuit-hint"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">Total : ionized Ca</div>
+            <div class="v" id="out-ca-ratio">—</div>
+            <div class="hint" id="out-ratio-hint"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="disclaimer">Educational reference only. Citrate protocols vary widely — follow your hospital order set.</aside>
+    </main>
+    <script type="module" src="/src/pages/citrate.js"></script>
+  </body>
+</html>

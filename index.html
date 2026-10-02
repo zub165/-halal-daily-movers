@@ -2,18 +2,66 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☽</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Halal Daily Movers</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { background: #0c0a09; }
-    </style>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>CRRT Calculators</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⊕</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <main class="wrap">
+      <section class="hero">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__content">
+          <h1>CRRT <em>Calculators</em></h1>
+          <p>
+            Dose, effluent, filtration fraction, dilution correction, citrate, and fluid balance —
+            built for ICU workflow reference with hybrid local and backend storage.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="./dose.html">Open dose calculator</a>
+            <a class="btn btn-ghost" href="./history.html">View saved history</a>
+          </div>
+          <p style="margin-top:1rem">
+            <span class="sync-pill" id="sync-status"><span class="dot"></span><span class="label">Checking sync…</span></span>
+          </p>
+        </div>
+      </section>
+
+      <section class="tool-grid" aria-label="Calculators">
+        <a class="tool-link" href="./dose.html">
+          <h3>Dose</h3>
+          <p>Effluent ÷ weight → mL/kg/h with 20–25 / 25–30 guidance.</p>
+        </a>
+        <a class="tool-link" href="./effluent.html">
+          <h3>Effluent</h3>
+          <p>CVVH / CVVHD / CVVHDF effluent from replacement, dialysate, and UF.</p>
+        </a>
+        <a class="tool-link" href="./filtration.html">
+          <h3>Filtration fraction</h3>
+          <p>UF vs plasma flow — flag clotting risk above 20–25%.</p>
+        </a>
+        <a class="tool-link" href="./dilution.html">
+          <h3>Dilution dose</h3>
+          <p>Correct prescribed dose for pre-filter and PBP dilution.</p>
+        </a>
+        <a class="tool-link" href="./citrate.html">
+          <h3>Citrate &amp; calcium</h3>
+          <p>ACD-A rate suggestions and total:iCa accumulation check.</p>
+        </a>
+        <a class="tool-link" href="./fluid.html">
+          <h3>Fluid balance</h3>
+          <p>Net balance, removal rate, and target effluent from dose × weight.</p>
+        </a>
+      </section>
+
+      <aside class="disclaimer">
+        Educational / reference tool only. Not a substitute for institutional CRRT protocols,
+        pharmacist review, or clinical judgment. Always verify prescriptions with your care team.
+      </aside>
+    </main>
+    <script type="module" src="/src/pages/home.js"></script>
   </body>
 </html>

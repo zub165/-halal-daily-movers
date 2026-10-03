@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☽</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Halal Daily Movers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0c0a09;
+      }
+      .halal-back {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1000;
+        font: 600 12px/1 Inter, system-ui, sans-serif;
+        color: #d6d3d1;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(28, 25, 23, 0.85);
+        border: 1px solid #44403c;
+      }
+      .halal-back:hover {
+        color: #fff;
+        border-color: #78716c;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="halal-back" href="./index.html">← CRRT Calculators</a>
+    <div id="root"></div>
+    <script type="module" src="/src/halal/main.jsx"></script>
+  </body>
+</html>

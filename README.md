@@ -2,12 +2,21 @@
 
 Clinical reference calculators for Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.1.0** — modern HTML + JavaScript UI. Educational / protocol-support tool only. Not a medical device.
+**Version 2.2.0** — CRRT Calculators + separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+
+## Apps in this repo
+| URL path | App |
+|----------|-----|
+| `/` (`index.html`) | CRRT Calculators hub |
+| `/halal.html` | **Halal Daily Movers** (separate AAOIFI stock screener) |
+
+Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
 
 ## Calculators (separate HTML pages)
 | Page | Purpose |
 |------|---------|
-| `index.html` | Hub |
+| `index.html` | CRRT hub |
+| `halal.html` | Halal Daily Movers (separate) |
 | `dose.html` | Dose = effluent ÷ weight |
 | `effluent.html` | Modality effluent + dose |
 | `filtration.html` | Filtration fraction |

@@ -74,6 +74,28 @@
           </div>
         </div>
       </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">Suggested citrate rate</div>
+            <div class="eq">Citrate (mL/h) <span class="op">≈</span> Blood flow (mL/min) <span class="op">×</span> Ratio</div>
+            <div class="worked" id="formula-citrate-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Est. circuit citrate</div>
+            <div class="eq">[Citrate] <span class="op">≈</span> (Citrate rate <span class="op">×</span> 112) <span class="op">÷</span> (BFR×60 <span class="op">+</span> Citrate rate)</div>
+            <div class="worked" id="formula-conc-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Total : ionized calcium</div>
+            <div class="eq">Ratio <span class="op">=</span> Total Ca (mmol/L) <span class="op">÷</span> Systemic iCa (mmol/L)</div>
+            <div class="worked" id="formula-ca-worked">—</div>
+          </div>
+        </div>
+      </section>
+
       <aside class="disclaimer">Educational reference only. Citrate protocols vary widely — follow your hospital order set.</aside>
     </main>
     <script type="module" src="/src/pages/citrate.js"></script>

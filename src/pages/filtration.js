@@ -35,6 +35,7 @@ function render() {
     pbp,
   });
   const status = ffStatus(ff);
+  const denom = qp + pre + pbp;
 
   document.getElementById("out-ff").textContent =
     ff == null ? "—" : `${formatNum(ff, 1)}%`;
@@ -43,6 +44,15 @@ function render() {
   const hint = document.getElementById("out-ff-hint");
   hint.textContent = status.label;
   hint.className = `hint tone-${status.tone}`;
+
+  document.getElementById("formula-qp-worked").innerHTML =
+    `Q<sub>p</sub> <span class="op">=</span> ${formatNum(bloodFlow, 0)} <span class="op">×</span> 60 <span class="op">×</span> (1 − ${formatNum(hct, 2)}) <span class="op">=</span> <strong>${formatNum(qp, 0)} mL/h</strong>`;
+  document.getElementById("formula-uf-worked").innerHTML =
+    `UF <span class="op">=</span> ${formatNum(pre, 0)} <span class="op">+</span> ${formatNum(post, 0)} <span class="op">+</span> ${formatNum(removal, 0)} <span class="op">+</span> ${formatNum(pbp, 0)} <span class="op">=</span> <strong>${formatNum(uf, 0)} mL/h</strong>`;
+  document.getElementById("formula-ff-worked").innerHTML =
+    ff == null
+      ? "Enter blood flow and hematocrit."
+      : `FF <span class="op">=</span> ${formatNum(uf, 0)} <span class="op">÷</span> (${formatNum(qp, 0)} <span class="op">+</span> ${formatNum(pre, 0)} <span class="op">+</span> ${formatNum(pbp, 0)}) <span class="op">×</span> 100 <span class="op">=</span> ${formatNum(uf, 0)} <span class="op">÷</span> ${formatNum(denom, 0)} <span class="op">×</span> 100 <span class="op">=</span> <strong>${formatNum(ff, 1)}%</strong>`;
 
   return { bloodFlow, hctPct, pre, post, removal, pbp, ff, qp, uf, status: status.label };
 }

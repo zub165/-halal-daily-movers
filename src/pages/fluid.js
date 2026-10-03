@@ -42,6 +42,17 @@ function render() {
     netHint.className = "hint tone-muted";
   }
 
+  document.getElementById("formula-net-worked").innerHTML =
+    `Net <span class="op">=</span> ${formatNum(intake, 0)} <span class="op">−</span> ${formatNum(output, 0)} <span class="op">−</span> ${formatNum(removal, 0)} <span class="op">=</span> <strong>${formatNum(bal.net, 0)} mL</strong>`;
+  document.getElementById("formula-rate-worked").innerHTML =
+    bal.removalRateMlHr == null
+      ? "Enter hours to see removal rate."
+      : `Rate <span class="op">=</span> ${formatNum(removal, 0)} <span class="op">÷</span> ${formatNum(hours, 0)} <span class="op">=</span> <strong>${formatNum(bal.removalRateMlHr, 0)} mL/h</strong>`;
+  document.getElementById("formula-qe-worked").innerHTML =
+    suggestedQe == null
+      ? "Enter weight and target dose."
+      : `Effluent <span class="op">=</span> ${formatNum(targetDose, 1)} <span class="op">×</span> ${formatNum(weight, 1)} <span class="op">=</span> <strong>${formatNum(suggestedQe, 0)} mL/h</strong>`;
+
   return { intake, output, removal, hours, weight, targetDose, bal, suggestedQe };
 }
 

@@ -665,6 +665,65 @@ textarea:focus {
   color: var(--ink-soft);
 }
 
+/* ── Formula panel (under calculators) ──────────────── */
+.formula-panel {
+  margin-top: 1.15rem;
+  animation: rise 0.7s ease both;
+}
+
+.formula-panel .panel-head h2 {
+  font-size: 1.05rem;
+}
+
+.formula-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.formula-item {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #f7fbfa, #eef5f3);
+  border: 1px solid var(--line);
+}
+
+.formula-item .name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 0.4rem;
+}
+
+.formula-item .eq {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2.4vw, 0.98rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.formula-item .eq .op {
+  color: var(--teal);
+  margin: 0 0.15rem;
+}
+
+.formula-item .worked {
+  margin-top: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.formula-item .worked strong {
+  color: var(--teal-deep);
+  font-weight: 700;
+}
+
 @media (max-width: 900px) {
   .tool-grid { grid-template-columns: 1fr 1fr; }
   .calc-layout { grid-template-columns: 1fr; }

@@ -41,6 +41,30 @@ function render() {
   const dialysateField = document.getElementById("dialysate").closest(".field");
   dialysateField.style.display = m === "CVVH" ? "none" : "";
 
+  const eq = document.getElementById("formula-qe-eq");
+  const qeWorked = document.getElementById("formula-qe-worked");
+  const doseWorked = document.getElementById("formula-dose-worked");
+
+  if (m === "CVVH") {
+    eq.innerHTML =
+      "QE <span class=\"op\">=</span> Pre-RF <span class=\"op\">+</span> Post-RF <span class=\"op\">+</span> Fluid removal <span class=\"op\">+</span> PBP";
+    qeWorked.innerHTML = `QE <span class="op">=</span> ${formatNum(r.preFilterRf, 0)} <span class="op">+</span> ${formatNum(r.postFilterRf, 0)} <span class="op">+</span> ${formatNum(r.fluidRemoval, 0)} <span class="op">+</span> ${formatNum(r.pbp, 0)} <span class="op">=</span> <strong>${formatNum(qe, 0)} mL/h</strong>`;
+  } else if (m === "CVVHD") {
+    eq.innerHTML =
+      "QE <span class=\"op\">=</span> Dialysate <span class=\"op\">+</span> Fluid removal";
+    qeWorked.innerHTML = `QE <span class="op">=</span> ${formatNum(r.dialysate, 0)} <span class="op">+</span> ${formatNum(r.fluidRemoval, 0)} <span class="op">=</span> <strong>${formatNum(qe, 0)} mL/h</strong>`;
+  } else {
+    eq.innerHTML =
+      "QE <span class=\"op\">=</span> Pre-RF <span class=\"op\">+</span> Post-RF <span class=\"op\">+</span> Fluid removal <span class=\"op\">+</span> PBP <span class=\"op\">+</span> Dialysate";
+    qeWorked.innerHTML = `QE <span class="op">=</span> ${formatNum(r.preFilterRf, 0)} <span class="op">+</span> ${formatNum(r.postFilterRf, 0)} <span class="op">+</span> ${formatNum(r.fluidRemoval, 0)} <span class="op">+</span> ${formatNum(r.pbp, 0)} <span class="op">+</span> ${formatNum(r.dialysate, 0)} <span class="op">=</span> <strong>${formatNum(qe, 0)} mL/h</strong>`;
+  }
+
+  if (dose == null || weight <= 0) {
+    doseWorked.textContent = "Enter weight to see dose calculation.";
+  } else {
+    doseWorked.innerHTML = `Dose <span class="op">=</span> ${formatNum(qe, 0)} <span class="op">÷</span> ${formatNum(weight, 1)} <span class="op">=</span> <strong>${formatNum(dose, 1)} mL/kg/h</strong>`;
+  }
+
   return { modality: m, rates: r, weight, effluent: qe, dose, status: status.label };
 }
 

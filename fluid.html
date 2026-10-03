@@ -71,6 +71,28 @@
           </div>
         </div>
       </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">Net fluid balance</div>
+            <div class="eq">Net (mL) <span class="op">=</span> Intake <span class="op">−</span> Output <span class="op">−</span> CRRT removal</div>
+            <div class="worked" id="formula-net-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">CRRT removal rate</div>
+            <div class="eq">Removal rate (mL/h) <span class="op">=</span> CRRT removal (mL) <span class="op">÷</span> Hours</div>
+            <div class="worked" id="formula-rate-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Target effluent</div>
+            <div class="eq">Effluent (mL/h) <span class="op">=</span> Target dose (mL/kg/h) <span class="op">×</span> Weight (kg)</div>
+            <div class="worked" id="formula-qe-worked">—</div>
+          </div>
+        </div>
+      </section>
+
       <aside class="disclaimer">Educational reference only. Confirm with institutional protocol.</aside>
     </main>
     <script type="module" src="/src/pages/fluid.js"></script>

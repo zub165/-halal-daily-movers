@@ -71,6 +71,28 @@
           </div>
         </div>
       </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">Plasma flow</div>
+            <div class="eq">Q<sub>p</sub> (mL/h) <span class="op">=</span> Blood flow (mL/min) <span class="op">×</span> 60 <span class="op">×</span> (1 − Hct)</div>
+            <div class="worked" id="formula-qp-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Total ultrafiltration</div>
+            <div class="eq">UF <span class="op">=</span> Pre-RF <span class="op">+</span> Post-RF <span class="op">+</span> Fluid removal <span class="op">+</span> PBP</div>
+            <div class="worked" id="formula-uf-worked">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Filtration fraction</div>
+            <div class="eq">FF (%) <span class="op">=</span> UF <span class="op">÷</span> (Q<sub>p</sub> <span class="op">+</span> Pre-RF <span class="op">+</span> PBP) <span class="op">×</span> 100</div>
+            <div class="worked" id="formula-ff-worked">—</div>
+          </div>
+        </div>
+      </section>
+
       <aside class="disclaimer">Educational reference only. Confirm with institutional protocol.</aside>
     </main>
     <script type="module" src="/src/pages/filtration.js"></script>

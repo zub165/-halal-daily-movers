@@ -2,7 +2,7 @@
 
 Clinical reference calculators for Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.2.0** — CRRT Calculators + separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+**Version 2.3.0** — CRRT Calculators show live formulas under each tool; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
 
 ## Apps in this repo
 | URL path | App |

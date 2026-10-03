@@ -60,7 +60,7 @@ export function mountShell({ active, title }) {
   const footer = document.createElement("footer");
   footer.className = "footer";
   footer.innerHTML = `
-    <span>v${import.meta.env.VITE_APP_VERSION || "2.2.0"} · HTML + JavaScript · Educational reference only</span>
+    <span>v${import.meta.env.VITE_APP_VERSION || "2.3.0"} · HTML + JavaScript · Educational reference only</span>
     <span><a href="${pageUrl("privacy.html")}">Privacy</a> · Hybrid local + backend storage</span>
   `;
   document.body.appendChild(footer);

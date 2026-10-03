@@ -16,6 +16,13 @@ function render() {
   hint.textContent = status.label;
   hint.className = `hint tone-${status.tone}`;
 
+  const worked = document.getElementById("formula-worked");
+  if (dose == null || weight <= 0) {
+    worked.innerHTML = "Enter effluent and weight to see the calculation.";
+  } else {
+    worked.innerHTML = `Dose <span class="op">=</span> ${formatNum(effluent, 0)} <span class="op">÷</span> ${formatNum(weight, 1)} <span class="op">=</span> <strong>${formatNum(dose, 1)} mL/kg/h</strong>`;
+  }
+
   return { effluent, weight, dose, status: status.label };
 }
 

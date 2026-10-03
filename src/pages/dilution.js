@@ -4,6 +4,7 @@ import {
   prescribedDose,
   dilutionFactor,
   correctedDose,
+  plasmaFlowMlHr,
   doseStatus,
   formatNum,
 } from "../shared/calculations.js";
@@ -38,6 +39,8 @@ function render() {
   });
   const corrected = correctedDose(prescribed, dil);
   const status = doseStatus(corrected);
+  const qp = plasmaFlowMlHr(bloodFlow, hct);
+  const denom = qp + pre + pbp;
 
   document.getElementById("out-prescribed").textContent =
     prescribed == null ? "—" : `${formatNum(prescribed, 1)} mL/kg/h`;
@@ -48,6 +51,19 @@ function render() {
   const hint = document.getElementById("out-corrected-hint");
   hint.textContent = status.label;
   hint.className = `hint tone-${status.tone}`;
+
+  document.getElementById("formula-prescribed-worked").innerHTML =
+    prescribed == null
+      ? "Enter weight to see prescribed dose."
+      : `Dose <span class="op">=</span> ${formatNum(qe, 0)} <span class="op">÷</span> ${formatNum(weight, 1)} <span class="op">=</span> <strong>${formatNum(prescribed, 1)} mL/kg/h</strong>`;
+  document.getElementById("formula-df-worked").innerHTML =
+    dil == null
+      ? "Enter blood flow and hematocrit."
+      : `DF <span class="op">=</span> ${formatNum(qp, 0)} <span class="op">÷</span> (${formatNum(qp, 0)} <span class="op">+</span> ${formatNum(pre, 0)} <span class="op">+</span> ${formatNum(pbp, 0)}) <span class="op">=</span> ${formatNum(qp, 0)} <span class="op">÷</span> ${formatNum(denom, 0)} <span class="op">=</span> <strong>${formatNum(dil, 3)}</strong>`;
+  document.getElementById("formula-corrected-worked").innerHTML =
+    corrected == null
+      ? "Complete inputs to see corrected dose."
+      : `Corrected <span class="op">=</span> ${formatNum(prescribed, 1)} <span class="op">×</span> ${formatNum(dil, 3)} <span class="op">=</span> <strong>${formatNum(corrected, 1)} mL/kg/h</strong>`;
 
   return {
     modality,

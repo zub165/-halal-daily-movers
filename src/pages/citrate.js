@@ -61,6 +61,19 @@ function render() {
   rHint.textContent = caHint;
   rHint.className = `hint tone-${caTone}`;
 
+  const suggested = suggestCitrateRate(bfr, ratio);
+  const bloodMlHr = bfr * 60;
+  document.getElementById("formula-citrate-worked").innerHTML =
+    `Citrate <span class="op">≈</span> ${formatNum(bfr, 0)} <span class="op">×</span> ${formatNum(ratio, 1)} <span class="op">=</span> <strong>${formatNum(suggested, 0)} mL/h</strong>`;
+  document.getElementById("formula-conc-worked").innerHTML =
+    conc == null
+      ? "Enter blood flow and citrate rate."
+      : `[Citrate] <span class="op">≈</span> (${formatNum(citrateRate, 0)} <span class="op">×</span> 112) <span class="op">÷</span> (${formatNum(bloodMlHr, 0)} <span class="op">+</span> ${formatNum(citrateRate, 0)}) <span class="op">=</span> <strong>${formatNum(conc, 2)} mmol/L</strong>`;
+  document.getElementById("formula-ca-worked").innerHTML =
+    caRatio == null
+      ? "Enter total Ca and systemic iCa."
+      : `Ratio <span class="op">=</span> ${formatNum(totalCa, 2)} <span class="op">÷</span> ${formatNum(systemicIca, 2)} <span class="op">=</span> <strong>${formatNum(caRatio, 2)}</strong>`;
+
   return {
     bfr,
     ratio,

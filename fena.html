@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>FeNa · Nephrology Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="page-kicker">Nephrology · AKI workup</div>
+      <h1 class="page-title">FeNa &amp; FeUrea</h1>
+      <p class="page-lead">
+        Fractional excretion of sodium and urea for prerenal vs intrinsic AKI patterns — interpret with diuretics and clinical context.
+      </p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="una">Urine Na (mEq/L)</label>
+              <input id="una" type="number" min="0" max="300" step="0.1" value="20" />
+            </div>
+            <div class="field">
+              <label for="pna">Plasma Na (mEq/L)</label>
+              <input id="pna" type="number" min="80" max="200" step="0.1" value="140" />
+            </div>
+            <div class="field">
+              <label for="ucr">Urine Cr (mg/dL)</label>
+              <input id="ucr" type="number" min="1" max="500" step="0.1" value="80" />
+            </div>
+            <div class="field">
+              <label for="pcr">Plasma Cr (mg/dL)</label>
+              <input id="pcr" type="number" min="0.1" max="30" step="0.01" value="2.0" />
+            </div>
+            <div class="field">
+              <label for="uurea">Urine urea (mg/dL)</label>
+              <input id="uurea" type="number" min="0" max="2000" step="1" value="300" />
+            </div>
+            <div class="field">
+              <label for="purea">Plasma urea / BUN (mg/dL)</label>
+              <input id="purea" type="number" min="0" max="300" step="0.1" value="40" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" placeholder="e.g. AKI admit" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
+          <div class="result-block">
+            <div class="k">FeNa</div>
+            <div class="v" id="out-fena">—</div>
+            <div class="hint" id="out-fena-hint"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">FeUrea</div>
+            <div class="v" id="out-feurea">—</div>
+            <div class="hint" id="out-feurea-hint"></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">FeNa</div>
+            <div class="eq">FeNa (%) <span class="op">=</span> (UNa × PCr) <span class="op">÷</span> (PNa × UCr) <span class="op">×</span> 100</div>
+            <div class="worked" id="formula-fena">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">FeUrea</div>
+            <div class="eq">FeUrea (%) <span class="op">=</span> (UUrea × PCr) <span class="op">÷</span> (PUrea × UCr) <span class="op">×</span> 100</div>
+            <div class="worked" id="formula-feurea">—</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="disclaimer">Educational reference only. FeNa unreliable on diuretics; prefer FeUrea in that setting.</aside>
+    </main>
+    <script type="module" src="/src/pages/fena.js"></script>
+  </body>
+</html>

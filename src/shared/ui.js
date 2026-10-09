@@ -3,6 +3,11 @@ import { getBackendStatus } from "./storage.js";
 
 const PAGES = [
   { href: "index.html", id: "home", label: "Home" },
+  { href: "abg.html", id: "abg", label: "ABG" },
+  { href: "osmolality.html", id: "osmolality", label: "Osm" },
+  { href: "egfr.html", id: "egfr", label: "eGFR" },
+  { href: "fena.html", id: "fena", label: "FeNa" },
+  { href: "electrolytes.html", id: "electrolytes", label: "Lytes" },
   { href: "dose.html", id: "dose", label: "Dose" },
   { href: "effluent.html", id: "effluent", label: "Effluent" },
   { href: "filtration.html", id: "filtration", label: "Filtration" },
@@ -24,7 +29,7 @@ export function pageUrl(file) {
 }
 
 export function mountShell({ active, title }) {
-  document.title = title ? `${title} · CRRT Calculators` : "CRRT Calculators";
+  document.title = title ? `${title} · Nephrology Calculators` : "Nephrology Calculators";
 
   const header = document.createElement("header");
   header.className = "site-header";
@@ -32,7 +37,7 @@ export function mountShell({ active, title }) {
     <div class="site-header__inner">
       <a class="brand" href="${pageUrl("index.html")}">
         <span class="brand__mark" aria-hidden="true">⊕</span>
-        <span class="brand__text">CRRT Calculators<span>ICU reference toolkit</span></span>
+        <span class="brand__text">Nephrology Calculators<span>Bedside + CRRT toolkit</span></span>
       </a>
       <nav class="nav" aria-label="Primary">
         ${PAGES.map(
@@ -60,7 +65,7 @@ export function mountShell({ active, title }) {
   const footer = document.createElement("footer");
   footer.className = "footer";
   footer.innerHTML = `
-    <span>v${import.meta.env.VITE_APP_VERSION || "2.3.0"} · HTML + JavaScript · Educational reference only</span>
+    <span>v${import.meta.env.VITE_APP_VERSION || "2.4.0"} · HTML + JavaScript · Educational reference only</span>
     <span><a href="${pageUrl("privacy.html")}">Privacy</a> · Hybrid local + backend storage</span>
   `;
   document.body.appendChild(footer);

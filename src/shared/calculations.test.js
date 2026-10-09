@@ -8,6 +8,18 @@ import {
   filtrationFraction,
   suggestCitrateRate,
   calciumToIonizedRatio,
+  calculatedOsmolality,
+  osmolalGap,
+  anionGap,
+  wintersExpectedPco2,
+  interpretAbg,
+  egfrCkdEpi2021,
+  cockcroftGault,
+  fractionalExcretionNa,
+  correctedSodium,
+  correctedCalcium,
+  freeWaterDeficit,
+  bicarbonateDeficit,
 } from "./calculations.js";
 
 test("CVVHDF effluent sums UF + dialysate", () => {
@@ -62,4 +74,42 @@ test("filtration fraction warns above 25%", () => {
 test("citrate suggestion and Ca ratio", () => {
   assert.equal(suggestCitrateRate(150, 1.5), 225);
   assert.ok(calciumToIonizedRatio(2.6, 1.0) > 2.5);
+});
+
+test("serum osmolality and osm gap", () => {
+  const calc = calculatedOsmolality({ na: 140, glucoseMgDl: 90, bunMgDl: 14 });
+  // 280 + 5 + 5 = 290
+  assert.ok(Math.abs(calc - 290) < 0.5);
+  assert.ok(Math.abs(osmolalGap(300, calc) - 10) < 0.5);
+});
+
+test("anion gap and Winter's for metabolic acidosis", () => {
+  assert.equal(anionGap(140, 104, 12), 24);
+  const w = wintersExpectedPco2(12);
+  assert.equal(w.expected, 26);
+  const interp = interpretAbg({ pH: 7.28, pco2: 26, hco3: 12, ag: 24 });
+  assert.match(interp.primary, /Metabolic acidosis/i);
+});
+
+test("CKD-EPI 2021 and Cockcroft-Gault", () => {
+  const egfr = egfrCkdEpi2021({ scrMgDl: 1.0, ageYears: 50, sex: "male" });
+  assert.ok(egfr > 80 && egfr < 110);
+  const crcl = cockcroftGault({
+    ageYears: 50,
+    weightKg: 70,
+    scrMgDl: 1.0,
+    sex: "male",
+  });
+  assert.ok(Math.abs(crcl - 87.5) < 0.1);
+});
+
+test("FeNa, corrected Na/Ca, deficits", () => {
+  const fena = fractionalExcretionNa({ uNa: 20, pNa: 140, uCr: 100, pCr: 2 });
+  assert.ok(Math.abs(fena - 0.286) < 0.01);
+  assert.ok(Math.abs(correctedSodium(130, 400, 1.6) - 134.8) < 0.01);
+  assert.ok(Math.abs(correctedCalcium(8, 2.5) - 9.2) < 0.01);
+  // TBW 0.6×70=42; FWD = 42×(154/140−1) = 4.2 L
+  const fwd = freeWaterDeficit({ na: 154, weightKg: 70, sex: "male" });
+  assert.ok(Math.abs(fwd - 4.2) < 0.01);
+  assert.equal(bicarbonateDeficit({ weightKg: 70, currentHco3: 12, desiredHco3: 24 }), 420);
 });

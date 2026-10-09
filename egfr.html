@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>eGFR · Nephrology Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="page-kicker">Nephrology · Kidney function</div>
+      <h1 class="page-title">eGFR &amp; CrCl</h1>
+      <p class="page-lead">
+        CKD-EPI 2021 (race-free) eGFR and Cockcroft–Gault creatinine clearance for dosing context.
+      </p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="scr">Creatinine (mg/dL)</label>
+              <input id="scr" type="number" min="0.1" max="30" step="0.01" value="1.2" />
+            </div>
+            <div class="field">
+              <label for="age">Age (years)</label>
+              <input id="age" type="number" min="18" max="120" step="1" value="65" />
+            </div>
+            <div class="field">
+              <label for="sex">Sex</label>
+              <select id="sex">
+                <option value="female">Female</option>
+                <option value="male" selected>Male</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg) — for CrCl</label>
+              <input id="weight" type="number" min="20" max="300" step="0.1" value="80" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" placeholder="e.g. Clinic visit Cr" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
+          <div class="result-block">
+            <div class="k">eGFR CKD-EPI 2021</div>
+            <div class="v" id="out-egfr">—</div>
+            <div class="hint" id="out-stage"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">Cockcroft–Gault CrCl</div>
+            <div class="v" id="out-crcl">—</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">CKD-EPI 2021 (creatinine, race-free)</div>
+            <div class="eq">142 × min(Scr/κ,1)<sup>α</sup> × max(Scr/κ,1)<sup>−1.200</sup> × 0.9938<sup>Age</sup> × (1.012 if female)</div>
+            <div class="worked" id="formula-egfr">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Cockcroft–Gault</div>
+            <div class="eq">CrCl <span class="op">=</span> [(140 − age) × weight × (0.85 if ♀)] <span class="op">÷</span> (72 × Scr)</div>
+            <div class="worked" id="formula-crcl">—</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="disclaimer">Educational reference only. Staging needs albuminuria; drug dosing may use CrCl per label.</aside>
+    </main>
+    <script type="module" src="/src/pages/egfr.js"></script>
+  </body>
+</html>

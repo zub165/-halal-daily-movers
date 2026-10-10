@@ -26,6 +26,25 @@
   --page-accent: var(--teal);
   --page-accent-soft: #d7f1ef;
   --page-accent-deep: var(--teal-deep);
+  /* Per-formula accents (accessible clinical palette) */
+  --fx-teal: #0b6f74;
+  --fx-teal-soft: #d5f0ee;
+  --fx-teal-deep: #055055;
+  --fx-sea: #1f6594;
+  --fx-sea-soft: #d8ebf6;
+  --fx-sea-deep: #15466a;
+  --fx-forest: #14724f;
+  --fx-forest-soft: #d7f2e6;
+  --fx-forest-deep: #0b4d35;
+  --fx-amber: #9a5b0a;
+  --fx-amber-soft: #fceed6;
+  --fx-amber-deep: #6f4006;
+  --fx-coral: #a84538;
+  --fx-coral-soft: #fde8e4;
+  --fx-coral-deep: #7a2f26;
+  --fx-indigo: #4a5794;
+  --fx-indigo-soft: #e3e7f7;
+  --fx-indigo-deep: #323d6d;
 }
 
 /* Per-module accents — clinical teal family + restrained companions */
@@ -533,11 +552,13 @@ textarea:focus {
 }
 
 .result-block {
+  --rx: var(--page-accent);
+  --rx-soft: var(--page-accent-soft);
   padding: 1rem 1.05rem;
   border-radius: 14px;
-  background: linear-gradient(160deg, #fff, var(--page-accent-soft));
+  background: linear-gradient(160deg, #fff, var(--rx-soft));
   border: 1px solid var(--line);
-  border-left: 4px solid var(--page-accent);
+  border-left: 4px solid var(--rx);
   transition: transform 0.2s ease;
 }
 
@@ -545,11 +566,21 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
+/* Distinct result accents within a calculator (skip .panel-head) */
+.results > .result-block:nth-child(2) { --rx: var(--fx-teal); --rx-soft: var(--fx-teal-soft); }
+.results > .result-block:nth-child(3) { --rx: var(--fx-sea); --rx-soft: var(--fx-sea-soft); }
+.results > .result-block:nth-child(4) { --rx: var(--fx-forest); --rx-soft: var(--fx-forest-soft); }
+.results > .result-block:nth-child(5) { --rx: var(--fx-amber); --rx-soft: var(--fx-amber-soft); }
+.results > .result-block:nth-child(6) { --rx: var(--fx-coral); --rx-soft: var(--fx-coral-soft); }
+.results > .result-block:nth-child(7) { --rx: var(--fx-indigo); --rx-soft: var(--fx-indigo-soft); }
+.results > .result-block:nth-child(8) { --rx: var(--fx-teal); --rx-soft: var(--fx-teal-soft); }
+.results > .result-block:nth-child(9) { --rx: var(--fx-sea); --rx-soft: var(--fx-sea-soft); }
+
 .result-block .k {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--mute);
+  color: var(--rx);
   font-weight: 700;
 }
 
@@ -836,10 +867,14 @@ textarea:focus {
 }
 
 .formula-item {
-  padding: 0.9rem 1rem;
+  --fx: var(--fx-teal);
+  --fx-soft: var(--fx-teal-soft);
+  --fx-deep: var(--fx-teal-deep);
+  padding: 0.9rem 1rem 0.9rem 1.05rem;
   border-radius: 14px;
-  background: linear-gradient(160deg, #fff, var(--page-accent-soft));
-  border: 1px solid var(--line);
+  background: linear-gradient(160deg, #fff, var(--fx-soft));
+  border: 1px solid color-mix(in srgb, var(--fx) 22%, var(--line));
+  border-left: 4px solid var(--fx);
 }
 
 .formula-item .name {
@@ -847,7 +882,7 @@ textarea:focus {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--mute);
+  color: var(--fx);
   margin-bottom: 0.4rem;
 }
 
@@ -861,8 +896,9 @@ textarea:focus {
 }
 
 .formula-item .eq .op {
-  color: var(--page-accent);
+  color: var(--fx);
   margin: 0 0.15rem;
+  font-weight: 700;
 }
 
 .formula-item .worked {
@@ -875,8 +911,36 @@ textarea:focus {
 }
 
 .formula-item .worked strong {
-  color: var(--page-accent-deep);
+  color: var(--fx-deep);
   font-weight: 700;
+}
+
+/* Explicit tones — same formula concept keeps the same color across pages */
+.formula-tone-teal { --fx: var(--fx-teal); --fx-soft: var(--fx-teal-soft); --fx-deep: var(--fx-teal-deep); }
+.formula-tone-sea { --fx: var(--fx-sea); --fx-soft: var(--fx-sea-soft); --fx-deep: var(--fx-sea-deep); }
+.formula-tone-forest { --fx: var(--fx-forest); --fx-soft: var(--fx-forest-soft); --fx-deep: var(--fx-forest-deep); }
+.formula-tone-amber { --fx: var(--fx-amber); --fx-soft: var(--fx-amber-soft); --fx-deep: var(--fx-amber-deep); }
+.formula-tone-coral { --fx: var(--fx-coral); --fx-soft: var(--fx-coral-soft); --fx-deep: var(--fx-coral-deep); }
+.formula-tone-indigo { --fx: var(--fx-indigo); --fx-soft: var(--fx-indigo-soft); --fx-deep: var(--fx-indigo-deep); }
+
+/* Fallback rotation when a tone class is not set */
+.formula-list > .formula-item:nth-child(6n + 1):not([class*="formula-tone-"]) {
+  --fx: var(--fx-teal); --fx-soft: var(--fx-teal-soft); --fx-deep: var(--fx-teal-deep);
+}
+.formula-list > .formula-item:nth-child(6n + 2):not([class*="formula-tone-"]) {
+  --fx: var(--fx-sea); --fx-soft: var(--fx-sea-soft); --fx-deep: var(--fx-sea-deep);
+}
+.formula-list > .formula-item:nth-child(6n + 3):not([class*="formula-tone-"]) {
+  --fx: var(--fx-forest); --fx-soft: var(--fx-forest-soft); --fx-deep: var(--fx-forest-deep);
+}
+.formula-list > .formula-item:nth-child(6n + 4):not([class*="formula-tone-"]) {
+  --fx: var(--fx-amber); --fx-soft: var(--fx-amber-soft); --fx-deep: var(--fx-amber-deep);
+}
+.formula-list > .formula-item:nth-child(6n + 5):not([class*="formula-tone-"]) {
+  --fx: var(--fx-coral); --fx-soft: var(--fx-coral-soft); --fx-deep: var(--fx-coral-deep);
+}
+.formula-list > .formula-item:nth-child(6n + 6):not([class*="formula-tone-"]) {
+  --fx: var(--fx-indigo); --fx-soft: var(--fx-indigo-soft); --fx-deep: var(--fx-indigo-deep);
 }
 
 @media (max-width: 900px) {

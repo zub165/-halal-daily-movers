@@ -50,7 +50,7 @@ function rowToRecord(row) {
 }
 
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, service: "crrt-calculators", version: "2.4.0", db: DB_PATH });
+  res.json({ ok: true, service: "crrt-calculators", version: "2.5.0", db: DB_PATH });
 });
 
 app.get("/api/calculations", (_req, res) => {

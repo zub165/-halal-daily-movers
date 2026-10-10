@@ -27,7 +27,7 @@ export default defineConfig({
     strictPort: true,
   },
   define: {
-    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.4.0"),
+    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.5.0"),
   },
   build: {
     rollupOptions: {

@@ -2,7 +2,7 @@
 
 Clinical reference calculators for nephrology bedside work (ABG, osmolality, eGFR, FeNa, electrolytes) and Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.4.0** — Nephrology bedside formulas plus CRRT tools; live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+**Version 2.5.0** — Polished clinical UI across hub + all calculators; nephrology bedside formulas plus CRRT tools; live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
 
 ## Apps in this repo
 | URL path | App |

@@ -15,49 +15,51 @@
       <section class="hero">
         <div class="hero__mesh" aria-hidden="true"></div>
         <div class="hero__orb" aria-hidden="true"></div>
+        <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
         <div class="hero__content">
-          <h1>Nephrology <em>Calculators</em></h1>
-          <p>
-            Bedside formulas for ABGs, serum osmolality, eGFR, FeNa, and electrolytes —
-            plus CRRT dosing tools — with hybrid local and backend storage.
-          </p>
+          <div class="hero__brand">Nephrology <em>Calculators</em></div>
+          <h1>
+            Bedside formulas for ABGs, osmolality, eGFR, FeNa, and electrolytes —
+            plus CRRT dosing tools with hybrid local and backend storage.
+          </h1>
           <div class="cta-row">
             <a class="btn btn-primary" href="./abg.html">Open ABG calculator</a>
             <a class="btn btn-ghost" href="./osmolality.html">Serum osmolality</a>
             <a class="btn btn-ghost" href="./history.html">View saved history</a>
             <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Checking sync…</span></span>
           </div>
-          <div class="stat-row">
-            <span class="stat-chip">5 nephrology tools</span>
-            <span class="stat-chip">6 CRRT tools</span>
-            <span class="stat-chip">v2.4.0</span>
-          </div>
         </div>
       </section>
 
+      <div class="meta-strip" aria-label="Toolkit summary">
+        <span class="meta-chip">5 nephrology tools</span>
+        <span class="meta-chip">6 CRRT tools</span>
+        <span class="meta-chip">v2.5.0</span>
+      </div>
+
       <h2 class="section-label">Nephrology — seeing patients</h2>
       <section class="tool-grid" aria-label="Nephrology calculators">
-        <a class="tool-link" href="./abg.html">
+        <a class="tool-link tool-link--abg" href="./abg.html">
           <div class="num">01</div>
           <h3>ABG / acid–base</h3>
           <p>pH, PCO₂, HCO₃, anion gap, Winter's, and delta–delta.</p>
         </a>
-        <a class="tool-link" href="./osmolality.html">
+        <a class="tool-link tool-link--osmolality" href="./osmolality.html">
           <div class="num">02</div>
           <h3>Serum osmolality</h3>
           <p>Calculated osm, osmolal gap, and effective tonicity.</p>
         </a>
-        <a class="tool-link" href="./egfr.html">
+        <a class="tool-link tool-link--egfr" href="./egfr.html">
           <div class="num">03</div>
           <h3>eGFR &amp; CrCl</h3>
           <p>CKD-EPI 2021 and Cockcroft–Gault for kidney function.</p>
         </a>
-        <a class="tool-link" href="./fena.html">
+        <a class="tool-link tool-link--fena" href="./fena.html">
           <div class="num">04</div>
           <h3>FeNa &amp; FeUrea</h3>
           <p>AKI workup — prerenal vs intrinsic patterns.</p>
         </a>
-        <a class="tool-link" href="./electrolytes.html">
+        <a class="tool-link tool-link--electrolytes" href="./electrolytes.html">
           <div class="num">05</div>
           <h3>Electrolytes</h3>
           <p>Corrected Na/Ca, free water &amp; HCO₃ deficit, UAG, TTKG.</p>
@@ -66,32 +68,32 @@
 
       <h2 class="section-label">CRRT calculators</h2>
       <section class="tool-grid" aria-label="CRRT calculators">
-        <a class="tool-link" href="./dose.html">
+        <a class="tool-link tool-link--dose" href="./dose.html">
           <div class="num">06</div>
           <h3>Dose</h3>
           <p>Effluent ÷ weight → mL/kg/h with 20–25 / 25–30 guidance.</p>
         </a>
-        <a class="tool-link" href="./effluent.html">
+        <a class="tool-link tool-link--effluent" href="./effluent.html">
           <div class="num">07</div>
           <h3>Effluent</h3>
           <p>CVVH / CVVHD / CVVHDF effluent from replacement, dialysate, and UF.</p>
         </a>
-        <a class="tool-link" href="./filtration.html">
+        <a class="tool-link tool-link--filtration" href="./filtration.html">
           <div class="num">08</div>
           <h3>Filtration fraction</h3>
           <p>UF vs plasma flow — flag clotting risk above 20–25%.</p>
         </a>
-        <a class="tool-link" href="./dilution.html">
+        <a class="tool-link tool-link--dilution" href="./dilution.html">
           <div class="num">09</div>
           <h3>Dilution dose</h3>
           <p>Correct prescribed dose for pre-filter and PBP dilution.</p>
         </a>
-        <a class="tool-link" href="./citrate.html">
+        <a class="tool-link tool-link--citrate" href="./citrate.html">
           <div class="num">10</div>
           <h3>Citrate &amp; calcium</h3>
           <p>ACD-A rate suggestions and total:iCa accumulation check.</p>
         </a>
-        <a class="tool-link" href="./fluid.html">
+        <a class="tool-link tool-link--fluid" href="./fluid.html">
           <div class="num">11</div>
           <h3>Fluid balance</h3>
           <p>Net balance, removal rate, and target effluent from dose × weight.</p>

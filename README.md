@@ -1,13 +1,13 @@
-# CRRT Calculators
+# Nephrology Calculators
 
-Clinical reference calculators for Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
+Clinical reference calculators for nephrology bedside work (ABG, osmolality, eGFR, FeNa, electrolytes) and Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.3.0** — CRRT Calculators show live formulas under each tool; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+**Version 2.4.0** — Nephrology bedside formulas plus CRRT tools; live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
 
 ## Apps in this repo
 | URL path | App |
 |----------|-----|
-| `/` (`index.html`) | CRRT Calculators hub |
+| `/` (`index.html`) | Nephrology + CRRT Calculators hub |
 | `/halal.html` | **Halal Daily Movers** (separate AAOIFI stock screener) |
 
 Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
@@ -15,8 +15,12 @@ Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
 ## Calculators (separate HTML pages)
 | Page | Purpose |
 |------|---------|
-| `index.html` | CRRT hub |
-| `halal.html` | Halal Daily Movers (separate) |
+| `index.html` | Hub |
+| `abg.html` | ABG / acid–base (AG, Winter's, Δ/Δ) |
+| `osmolality.html` | Serum osmolality, osm gap, tonicity |
+| `egfr.html` | CKD-EPI 2021 eGFR + Cockcroft–Gault |
+| `fena.html` | FeNa & FeUrea |
+| `electrolytes.html` | Corrected Na/Ca, FWD, HCO₃ deficit, UAG, TTKG |
 | `dose.html` | Dose = effluent ÷ weight |
 | `effluent.html` | Modality effluent + dose |
 | `filtration.html` | Filtration fraction |
@@ -25,6 +29,7 @@ Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
 | `fluid.html` | Net fluid balance |
 | `history.html` | Saved calculations |
 | `privacy.html` | Privacy policy + delete/export |
+| `halal.html` | Halal Daily Movers (separate) |
 
 ## Hybrid storage
 - **Local:** `localStorage` (`crrt_calculations_v1`)
@@ -60,4 +65,4 @@ Workflow builds static pages to `dist/`. Backend is optional for production stat
 Live path base: `/-halal-daily-movers/`
 
 ## Disclaimer
-Verify all prescriptions against institutional CRRT protocols. Do not enter PHI.
+Verify all results against institutional protocols and clinical judgment. Do not enter PHI.

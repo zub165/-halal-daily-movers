@@ -153,7 +153,7 @@ a {
 
 .mobile-nav {
   display: none;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.45rem;
   margin: 0.25rem 0 1.25rem;
 }

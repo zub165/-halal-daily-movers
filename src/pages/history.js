@@ -44,6 +44,15 @@ async function refresh() {
 
 function summarize(item) {
   const r = item.results || {};
+  if (item.type === "abg") return `${r.primary || "ABG"} · AG ${r.anion_gap?.toFixed?.(1) ?? r.anion_gap}`;
+  if (item.type === "osmolality")
+    return `Osm ${r.calculated_osm?.toFixed?.(1)} · gap ${r.osmolal_gap?.toFixed?.(1)}`;
+  if (item.type === "egfr")
+    return `eGFR ${r.egfr_ckd_epi_2021?.toFixed?.(1)} · CrCl ${r.crcl_cockcroft_gault?.toFixed?.(1)}`;
+  if (item.type === "fena")
+    return `FeNa ${r.fena_pct?.toFixed?.(2)}% · FeUrea ${r.feurea_pct?.toFixed?.(1)}%`;
+  if (item.type === "electrolytes")
+    return `Na corr ${r.corrected_na_1_6?.toFixed?.(1)} · Ca corr ${r.corrected_ca?.toFixed?.(1)}`;
   if (item.type === "dose") return `${r.dose_ml_kg_hr?.toFixed?.(1) ?? r.dose_ml_kg_hr} mL/kg/h`;
   if (item.type === "effluent") return `QE ${r.effluent_ml_hr} · dose ${r.dose_ml_kg_hr?.toFixed?.(1)}`;
   if (item.type === "filtration") return `FF ${r.filtration_fraction_pct?.toFixed?.(1)}%`;

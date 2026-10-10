@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Electrolytes · Nephrology Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="page-kicker">Nephrology · Electrolytes</div>
+      <h1 class="page-title">Electrolyte formulas</h1>
+      <p class="page-lead">
+        Corrected sodium and calcium, free water and bicarbonate deficits, urine anion gap, and TTKG for rounds.
+      </p>
+      <div class="calc-layout">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="na">Measured Na (mEq/L)</label>
+              <input id="na" type="number" min="80" max="200" step="0.1" value="128" />
+            </div>
+            <div class="field">
+              <label for="glucose">Glucose (mg/dL)</label>
+              <input id="glucose" type="number" min="0" max="2000" step="1" value="400" />
+            </div>
+            <div class="field">
+              <label for="ca">Measured Ca (mg/dL)</label>
+              <input id="ca" type="number" min="0" max="20" step="0.1" value="8.0" />
+            </div>
+            <div class="field">
+              <label for="albumin">Albumin (g/dL)</label>
+              <input id="albumin" type="number" min="0.5" max="6" step="0.1" value="2.5" />
+            </div>
+            <div class="field">
+              <label for="phos">Phosphate (mg/dL)</label>
+              <input id="phos" type="number" min="0" max="20" step="0.1" value="5.5" />
+            </div>
+            <div class="field">
+              <label for="hco3">Current HCO₃ (mEq/L)</label>
+              <input id="hco3" type="number" min="1" max="60" step="0.1" value="12" />
+            </div>
+            <div class="field">
+              <label for="desired-hco3">Desired HCO₃ (mEq/L)</label>
+              <input id="desired-hco3" type="number" min="10" max="30" step="0.1" value="24" />
+            </div>
+            <div class="field">
+              <label for="weight">Weight (kg)</label>
+              <input id="weight" type="number" min="20" max="300" step="0.1" value="70" />
+            </div>
+            <div class="field">
+              <label for="sex">Sex (TBW)</label>
+              <select id="sex">
+                <option value="female">Female</option>
+                <option value="male" selected>Male</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="elderly">Elderly TBW?</label>
+              <select id="elderly">
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="una">Urine Na (mEq/L)</label>
+              <input id="una" type="number" min="0" max="300" step="0.1" value="40" />
+            </div>
+            <div class="field">
+              <label for="uk">Urine K (mEq/L)</label>
+              <input id="uk" type="number" min="0" max="200" step="0.1" value="20" />
+            </div>
+            <div class="field">
+              <label for="ucl">Urine Cl (mEq/L)</label>
+              <input id="ucl" type="number" min="0" max="300" step="0.1" value="50" />
+            </div>
+            <div class="field">
+              <label for="pk">Plasma K (mEq/L)</label>
+              <input id="pk" type="number" min="1" max="10" step="0.1" value="3.0" />
+            </div>
+            <div class="field">
+              <label for="uosm">Urine osm (mOsm/kg)</label>
+              <input id="uosm" type="number" min="50" max="1200" step="1" value="400" />
+            </div>
+            <div class="field">
+              <label for="posm">Plasma osm (mOsm/kg)</label>
+              <input id="posm" type="number" min="100" max="500" step="0.1" value="290" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" placeholder="e.g. Hyponatremia + hypoK" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-save">Save result</button>
+          </div>
+        </form>
+        <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
+          <div class="result-block">
+            <div class="k">Corrected Na (×1.6)</div>
+            <div class="v" id="out-na">—</div>
+            <div class="hint" id="out-na-24"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">Corrected Ca · Ca×P</div>
+            <div class="v" id="out-ca">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Free water deficit</div>
+            <div class="v" id="out-fwd">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">HCO₃ deficit</div>
+            <div class="v" id="out-bicarb">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Urine AG · TTKG</div>
+            <div class="v" id="out-uag">—</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item">
+            <div class="name">Corrected sodium</div>
+            <div class="eq">Na<sub>corr</sub> <span class="op">=</span> Na <span class="op">+</span> 1.6 <span class="op">×</span> [(Glu − 100)/100]</div>
+            <div class="worked" id="formula-na">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Corrected calcium</div>
+            <div class="eq">Ca<sub>corr</sub> <span class="op">=</span> Ca <span class="op">+</span> 0.8 <span class="op">×</span> (4 − albumin)</div>
+            <div class="worked" id="formula-ca">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Free water deficit</div>
+            <div class="eq">FWD <span class="op">=</span> TBW <span class="op">×</span> (Na/140 <span class="op">−</span> 1)</div>
+            <div class="worked" id="formula-fwd">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Bicarbonate deficit</div>
+            <div class="eq">Deficit <span class="op">=</span> 0.5 <span class="op">×</span> wt <span class="op">×</span> (desired − current)</div>
+            <div class="worked" id="formula-bicarb">—</div>
+          </div>
+          <div class="formula-item">
+            <div class="name">Urine AG &amp; TTKG</div>
+            <div class="eq">UAG <span class="op">=</span> UNa + UK − UCl · TTKG <span class="op">=</span> (UK/PK) ÷ (Uosm/Posm)</div>
+            <div class="worked" id="formula-uag">—</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="disclaimer">Educational reference only. Correction rates and replacement require clinical judgment and monitoring.</aside>
+    </main>
+    <script type="module" src="/src/pages/electrolytes.js"></script>
+  </body>
+</html>

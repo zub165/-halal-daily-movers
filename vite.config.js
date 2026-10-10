@@ -27,12 +27,17 @@ export default defineConfig({
     strictPort: true,
   },
   define: {
-    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.3.0"),
+    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.4.0"),
   },
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
+        abg: resolve(__dirname, "abg.html"),
+        osmolality: resolve(__dirname, "osmolality.html"),
+        egfr: resolve(__dirname, "egfr.html"),
+        fena: resolve(__dirname, "fena.html"),
+        electrolytes: resolve(__dirname, "electrolytes.html"),
         dose: resolve(__dirname, "dose.html"),
         effluent: resolve(__dirname, "effluent.html"),
         filtration: resolve(__dirname, "filtration.html"),
@@ -46,3 +51,4 @@ export default defineConfig({
     },
   },
 });
+

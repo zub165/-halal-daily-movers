@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Quick Check · Steal Syndrome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap steal-guide">
+      <header class="steal-header">
+        <div>
+          <h1>Dialysis Access Steal Syndrome</h1>
+          <p>Quick check — answers sync to localStorage and the SQLite API when available.</p>
+        </div>
+        <div class="badge">Vascular Access</div>
+      </header>
+      <div class="case-strip" id="caseStrip"></div>
+      <div class="tabs" id="tabs"></div>
+
+      <section class="quiz">
+        <h3>Quick Check — <span id="quizCount">0</span> Questions</h3>
+        <div class="quiz-actions">
+          <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          <span id="quizScore" class="tone-muted" style="font-size:0.85rem;font-weight:700"></span>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-save-quiz">Save progress</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-restore-quiz">Restore saved</button>
+          <button type="button" class="btn btn-danger btn-sm" id="btn-reset-quiz">Reset quiz</button>
+        </div>
+        <div class="quiz-grid" id="quizGrid"></div>
+      </section>
+
+      <aside class="disclaimer">
+        Educational use only · Not medical advice · A Gift by Dr. Malik ·
+        <a href="./privacy.html">Privacy &amp; delete data</a>
+      </aside>
+    </main>
+    <script type="module" src="/src/pages/steal-quiz.js"></script>
+  </body>
+</html>

@@ -27,7 +27,7 @@ export default defineConfig({
     strictPort: true,
   },
   define: {
-    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.4.0"),
+    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.5.0"),
   },
   build: {
     rollupOptions: {
@@ -47,6 +47,12 @@ export default defineConfig({
         history: resolve(__dirname, "history.html"),
         privacy: resolve(__dirname, "privacy.html"),
         halal: resolve(__dirname, "halal.html"),
+        steal: resolve(__dirname, "steal.html"),
+        stealNormal: resolve(__dirname, "steal-normal.html"),
+        stealPhenomenon: resolve(__dirname, "steal-phenomenon.html"),
+        stealPseudoaneurysm: resolve(__dirname, "steal-pseudoaneurysm.html"),
+        stealTreatment: resolve(__dirname, "steal-treatment.html"),
+        stealQuiz: resolve(__dirname, "steal-quiz.html"),
       },
     },
   },

@@ -5,6 +5,7 @@
 
 const LOCAL_KEY = "crrt_calculations_v1";
 const SETTINGS_KEY = "crrt_settings_v1";
+const STEAL_QUIZ_KEY = "steal_quiz_progress_v1";
 
 function apiBase() {
   const fromEnv = import.meta.env?.VITE_API_BASE;
@@ -122,9 +123,16 @@ export function setSettings(partial) {
 }
 
 export async function exportAllData() {
+  let steal_quiz_progress = {};
+  try {
+    steal_quiz_progress = JSON.parse(localStorage.getItem(STEAL_QUIZ_KEY) || "{}");
+  } catch {
+    steal_quiz_progress = {};
+  }
   return {
     exported_at: new Date().toISOString(),
     settings: getSettings(),
+    steal_quiz_progress,
     calculations: await listCalculations(),
   };
 }
@@ -133,5 +141,6 @@ export async function wipeAllUserData() {
   await deleteAllCalculations();
   localStorage.removeItem(LOCAL_KEY);
   localStorage.removeItem(SETTINGS_KEY);
+  localStorage.removeItem(STEAL_QUIZ_KEY);
   return true;
 }

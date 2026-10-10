@@ -2,7 +2,7 @@
 
 Clinical reference calculators for nephrology bedside work (ABG, osmolality, eGFR, FeNa, electrolytes) and Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.4.0** — Nephrology bedside formulas plus CRRT tools; live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+**Version 2.5.0** — Nephrology bedside formulas plus CRRT tools; dialysis access steal syndrome interactive guide (separate HTML tab pages + quiz); live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
 
 ## Apps in this repo
 | URL path | App |
@@ -29,6 +29,12 @@ Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
 | `fluid.html` | Net fluid balance |
 | `history.html` | Saved calculations |
 | `privacy.html` | Privacy policy + delete/export |
+| `steal.html` | Steal syndrome guide hub |
+| `steal-normal.html` | Normal AVF flow diagram |
+| `steal-phenomenon.html` | Steal / retrograde flow |
+| `steal-pseudoaneurysm.html` | Pseudoaneurysm teaching |
+| `steal-treatment.html` | Banding / DRIL / ligation |
+| `steal-quiz.html` | Quick-check quiz (hybrid save) |
 | `halal.html` | Halal Daily Movers (separate) |
 
 ## Hybrid storage

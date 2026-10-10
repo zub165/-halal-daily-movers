@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Steal Syndrome · Nephrology Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap steal-guide">
+      <header class="steal-header">
+        <div>
+          <h1>Dialysis Access Steal Syndrome</h1>
+          <p>Interactive guide — watch antegrade flow into the hand vs retrograde flow into the fistula.</p>
+        </div>
+        <div class="badge">Vascular Access</div>
+      </header>
+
+      <div class="case-strip" id="caseStrip"></div>
+      <div class="tabs" id="tabs"></div>
+
+      <p class="page-lead" style="margin-bottom: 8px">
+        Separate pages for each teaching tab. Quiz answers save to hybrid localStorage + SQLite backend.
+        <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+      </p>
+
+      <div class="hub-cards">
+        <a class="hub-card" id="startLink" href="./steal-normal.html">
+          <h3>Start — Normal Flow</h3>
+          <p>How a mature radiocephalic fistula should perfuse both access and hand.</p>
+        </a>
+        <a class="hub-card" href="./steal-phenomenon.html">
+          <h3>Steal Phenomenon</h3>
+          <p>Retrograde distal radial flow and hand ischemia at 4,774 mL/min.</p>
+        </a>
+        <a class="hub-card" href="./steal-pseudoaneurysm.html">
+          <h3>Pseudoaneurysm</h3>
+          <p>2.7 cm contained rupture from chronic needling.</p>
+        </a>
+        <a class="hub-card" href="./steal-treatment.html">
+          <h3>Treatment</h3>
+          <p>Banding, DRIL, and ligation — when to use each.</p>
+        </a>
+        <a class="hub-card" id="quizLink" href="./steal-quiz.html">
+          <h3>Quick Check Quiz</h3>
+          <p>10 board-style questions with save / restore progress.</p>
+        </a>
+      </div>
+
+      <aside class="disclaimer">
+        Educational use only · Not medical advice · A Gift by Dr. Malik · Do not enter PHI
+      </aside>
+    </main>
+    <script type="module" src="/src/pages/steal.js"></script>
+  </body>
+</html>

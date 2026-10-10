@@ -59,6 +59,8 @@ function summarize(item) {
   if (item.type === "dilution") return `Corrected ${r.corrected_dose?.toFixed?.(1)}`;
   if (item.type === "citrate") return `Citrate ${r.suggested_citrate_ml_hr} mL/h`;
   if (item.type === "fluid") return `Net ${r.net_ml} mL`;
+  if (item.type === "steal_quiz")
+    return `Quiz ${r.correct ?? 0}/${r.answered ?? 0} (${r.score_pct ?? 0}%)`;
   return JSON.stringify(r).slice(0, 80);
 }
 

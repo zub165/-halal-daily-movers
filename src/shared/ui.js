@@ -14,6 +14,7 @@ const PAGES = [
   { href: "dilution.html", id: "dilution", label: "Dilution" },
   { href: "citrate.html", id: "citrate", label: "Citrate" },
   { href: "fluid.html", id: "fluid", label: "Fluid" },
+  { href: "steal.html", id: "steal", label: "Steal" },
   { href: "history.html", id: "history", label: "History" },
   { href: "halal.html", id: "halal", label: "Halal" },
   { href: "privacy.html", id: "privacy", label: "Privacy" },
@@ -65,7 +66,7 @@ export function mountShell({ active, title }) {
   const footer = document.createElement("footer");
   footer.className = "footer";
   footer.innerHTML = `
-    <span>v${import.meta.env.VITE_APP_VERSION || "2.4.0"} · HTML + JavaScript · Educational reference only</span>
+    <span>v${import.meta.env.VITE_APP_VERSION || "2.5.0"} · HTML + JavaScript · Educational reference only</span>
     <span><a href="${pageUrl("privacy.html")}">Privacy</a> · Hybrid local + backend storage</span>
   `;
   document.body.appendChild(footer);

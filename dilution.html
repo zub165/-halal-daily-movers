@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    <title>Dilution Dose · CRRT Calculators</title>
+    <title>Dilution Dose · Nephrology Calculators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="wrap">
-      <div class="page-kicker">Calculator 04</div>
+      <div class="page-kicker">CRRT · Dilution</div>
       <h1 class="page-title">Dilution-corrected dose</h1>
       <p class="page-lead">When using pre-filter replacement or PBP fluid, multiply prescribed dose by the dilution factor to estimate effective clearance.</p>
       <div class="calc-layout">
@@ -91,17 +91,17 @@
       <section class="panel formula-panel" aria-label="Formulas">
         <div class="panel-head"><h2>Formulas used</h2></div>
         <div class="formula-list">
-          <div class="formula-item">
+          <div class="formula-item formula-tone-teal">
             <div class="name">Prescribed dose</div>
             <div class="eq">Dose <span class="op">=</span> Effluent (mL/h) <span class="op">÷</span> Weight (kg)</div>
             <div class="worked" id="formula-prescribed-worked">—</div>
           </div>
-          <div class="formula-item">
+          <div class="formula-item formula-tone-indigo">
             <div class="name">Dilution factor</div>
             <div class="eq">DF <span class="op">=</span> Q<sub>p</sub> <span class="op">÷</span> (Q<sub>p</sub> <span class="op">+</span> Pre-RF <span class="op">+</span> PBP)</div>
             <div class="worked" id="formula-df-worked">—</div>
           </div>
-          <div class="formula-item">
+          <div class="formula-item formula-tone-forest">
             <div class="name">Corrected dose</div>
             <div class="eq">Corrected dose <span class="op">=</span> Prescribed dose <span class="op">×</span> Dilution factor</div>
             <div class="worked" id="formula-corrected-worked">—</div>

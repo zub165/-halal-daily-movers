@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    <title>Filtration Fraction · CRRT Calculators</title>
+    <title>Filtration Fraction · Nephrology Calculators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="wrap">
-      <div class="page-kicker">Calculator 03</div>
+      <div class="page-kicker">CRRT · Filtration</div>
       <h1 class="page-title">Filtration fraction</h1>
       <p class="page-lead">FF = total UF ÷ (plasma flow + pre-filter RF + PBP). Values above ~20–25% raise filter clotting risk.</p>
       <div class="calc-layout">
@@ -75,17 +75,17 @@
       <section class="panel formula-panel" aria-label="Formulas">
         <div class="panel-head"><h2>Formulas used</h2></div>
         <div class="formula-list">
-          <div class="formula-item">
+          <div class="formula-item formula-tone-sea">
             <div class="name">Plasma flow</div>
             <div class="eq">Q<sub>p</sub> (mL/h) <span class="op">=</span> Blood flow (mL/min) <span class="op">×</span> 60 <span class="op">×</span> (1 − Hct)</div>
             <div class="worked" id="formula-qp-worked">—</div>
           </div>
-          <div class="formula-item">
+          <div class="formula-item formula-tone-amber">
             <div class="name">Total ultrafiltration</div>
             <div class="eq">UF <span class="op">=</span> Pre-RF <span class="op">+</span> Post-RF <span class="op">+</span> Fluid removal <span class="op">+</span> PBP</div>
             <div class="worked" id="formula-uf-worked">—</div>
           </div>
-          <div class="formula-item">
+          <div class="formula-item formula-tone-forest">
             <div class="name">Filtration fraction</div>
             <div class="eq">FF (%) <span class="op">=</span> UF <span class="op">÷</span> (Q<sub>p</sub> <span class="op">+</span> Pre-RF <span class="op">+</span> PBP) <span class="op">×</span> 100</div>
             <div class="worked" id="formula-ff-worked">—</div>

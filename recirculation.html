@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <title>Recirculation · Nephrology Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="page-kicker">CRRT · Access · Multi-step</div>
+      <h1 class="page-title">Recirculation (multi-step)</h1>
+      <p class="page-lead">
+        Worked-steps calculator for vascular access recirculation — named variables S, A, V with a
+        saved step tape. Not a keypad: every intermediate is kept so you can audit the math.
+      </p>
+
+      <div class="calc-layout calc-layout--wide">
+        <form class="panel" id="calc-form" autocomplete="off">
+          <div class="panel-head">
+            <h2>Named variables</h2>
+            <span class="sync-pill" data-sync><span class="dot"></span><span class="label">Sync</span></span>
+          </div>
+          <p class="var-legend">
+            Two-needle urea method. Use the same concentration units for all three (e.g. BUN mg/dL).
+          </p>
+          <div class="form-grid">
+            <div class="field var-field var-field--s">
+              <label for="s"><span class="var-chip">S</span> Systemic (peripheral)</label>
+              <input id="s" type="number" step="0.1" value="60" />
+            </div>
+            <div class="field var-field var-field--a">
+              <label for="a"><span class="var-chip">A</span> Arterial line</label>
+              <input id="a" type="number" step="0.1" value="48" />
+            </div>
+            <div class="field var-field var-field--v">
+              <label for="v"><span class="var-chip">V</span> Venous line</label>
+              <input id="v" type="number" step="0.1" value="12" />
+            </div>
+            <div class="field full">
+              <label for="label">Save label (optional)</label>
+              <input id="label" type="text" placeholder="e.g. Fistula check — AM rounds" />
+            </div>
+          </div>
+          <div class="equation-strip" aria-hidden="true">
+            Recirculation (%) <span class="op">=</span> (S − A) <span class="op">÷</span> (S − V) <span class="op">×</span> 100
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-pin">Pin run to step tape</button>
+            <button type="button" class="btn btn-ghost" id="btn-save">Save result</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-clear-tape">Clear tape</button>
+          </div>
+        </form>
+
+        <div class="panel results">
+          <div class="panel-head"><h2>Live result</h2></div>
+          <div class="result-block">
+            <div class="k">Recirculation</div>
+            <div class="v" id="out-pct">—</div>
+            <div class="hint" id="out-hint"></div>
+          </div>
+          <div class="result-block">
+            <div class="k">Numerator (S − A)</div>
+            <div class="v" id="out-numer">—</div>
+          </div>
+          <div class="result-block">
+            <div class="k">Denominator (S − V)</div>
+            <div class="v" id="out-denom">—</div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel step-tape-panel" aria-label="Step tape">
+        <div class="panel-head">
+          <h2>Step tape</h2>
+          <span class="tape-meta" id="tape-meta">Live worked steps · pin to keep history</span>
+        </div>
+        <ol class="step-tape" id="live-steps" aria-live="polite"></ol>
+        <div class="tape-history" id="tape-history" hidden>
+          <h3 class="tape-history__title">Pinned runs</h3>
+          <div id="tape-history-list"></div>
+        </div>
+      </section>
+
+      <section class="panel formula-panel" aria-label="Formulas">
+        <div class="panel-head"><h2>Formulas used</h2></div>
+        <div class="formula-list">
+          <div class="formula-item formula-tone-coral">
+            <div class="name">Numerator</div>
+            <div class="eq">S <span class="op">−</span> A</div>
+            <div class="worked" id="formula-numer">—</div>
+          </div>
+          <div class="formula-item formula-tone-indigo">
+            <div class="name">Denominator</div>
+            <div class="eq">S <span class="op">−</span> V</div>
+            <div class="worked" id="formula-denom">—</div>
+          </div>
+          <div class="formula-item formula-tone-forest">
+            <div class="name">Ratio</div>
+            <div class="eq">(S <span class="op">−</span> A) <span class="op">÷</span> (S <span class="op">−</span> V)</div>
+            <div class="worked" id="formula-ratio">—</div>
+          </div>
+          <div class="formula-item formula-tone-teal">
+            <div class="name">Recirculation</div>
+            <div class="eq">Recirculation (%) <span class="op">=</span> Ratio <span class="op">×</span> 100</div>
+            <div class="worked" id="formula-pct">—</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="disclaimer">
+        Educational reference only. Access recirculation formulas assume simultaneous arterial/venous
+        and systemic sampling with consistent units. Correlate with clinical assessment of the access.
+      </aside>
+    </main>
+    <script type="module" src="/src/pages/recirculation.js"></script>
+  </body>
+</html>

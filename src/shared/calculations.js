@@ -113,6 +113,74 @@ export function ffStatus(ffPct) {
   return { label: "High clotting risk (>25%)", tone: "warn" };
 }
 
+/**
+ * Vascular access recirculation (%) via two-needle urea method:
+ * Recirculation = (S − A) / (S − V) × 100
+ * S = systemic, A = arterial line, V = venous line (same concentration units).
+ * Returns worked steps so the UI can show a multi-step tape (not a keypad).
+ */
+export function recirculationWorked({ s, a, v }) {
+  const steps = [];
+  const push = (id, label, expression, value, tone = "teal", status = "ok") => {
+    steps.push({ id, label, expression, value, tone, status });
+  };
+
+  if (![s, a, v].every(Number.isFinite)) {
+    push("bind", "Bind variables", "Enter S, A, and V", null, "teal", "pending");
+    return { pct: null, numer: null, denom: null, ratio: null, steps, error: "Enter S, A, and V" };
+  }
+
+  push("bind-s", "Bind S (systemic)", `S = ${formatNum(s, 2)}`, s, "teal", "ok");
+  push("bind-a", "Bind A (arterial)", `A = ${formatNum(a, 2)}`, a, "sea", "ok");
+  push("bind-v", "Bind V (venous)", `V = ${formatNum(v, 2)}`, v, "amber", "ok");
+
+  const numer = s - a;
+  push("numer", "Numerator", `S − A = ${formatNum(s, 2)} − ${formatNum(a, 2)} = ${formatNum(numer, 2)}`, numer, "coral", "ok");
+
+  const denom = s - v;
+  push("denom", "Denominator", `S − V = ${formatNum(s, 2)} − ${formatNum(v, 2)} = ${formatNum(denom, 2)}`, denom, "indigo", "ok");
+
+  if (denom === 0) {
+    push("ratio", "Divide", "(S − A) ÷ (S − V) — denominator is 0", null, "forest", "error");
+    return { pct: null, numer, denom, ratio: null, steps, error: "Denominator (S − V) is zero" };
+  }
+
+  const ratio = numer / denom;
+  push(
+    "ratio",
+    "Divide",
+    `(S − A) ÷ (S − V) = ${formatNum(numer, 2)} ÷ ${formatNum(denom, 2)} = ${formatNum(ratio, 4)}`,
+    ratio,
+    "forest",
+    "ok"
+  );
+
+  const pct = ratio * 100;
+  push(
+    "pct",
+    "Recirculation %",
+    `Ratio × 100 = ${formatNum(ratio, 4)} × 100 = ${formatNum(pct, 1)}%`,
+    pct,
+    "teal",
+    "ok"
+  );
+
+  return { pct, numer, denom, ratio, steps, error: null };
+}
+
+export function recirculationPct({ s, a, v }) {
+  const { pct } = recirculationWorked({ s, a, v });
+  return pct;
+}
+
+export function recirculationStatus(pct) {
+  if (pct == null || Number.isNaN(pct)) return { label: "—", tone: "muted" };
+  if (pct < 0) return { label: "Negative — check sampling / units", tone: "warn" };
+  if (pct < 10) return { label: "Low recirculation (<10%)", tone: "ok" };
+  if (pct <= 15) return { label: "Borderline (10–15%) — investigate access", tone: "caution" };
+  return { label: "Significant recirculation (>15%)", tone: "warn" };
+}
+
 export function formatNum(n, digits = 1) {
   if (n == null || Number.isNaN(n)) return "—";
   return Number(n).toFixed(digits);

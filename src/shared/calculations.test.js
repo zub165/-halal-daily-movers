@@ -20,6 +20,8 @@ import {
   correctedCalcium,
   freeWaterDeficit,
   bicarbonateDeficit,
+  recirculationPct,
+  recirculationWorked,
 } from "./calculations.js";
 
 test("CVVHDF effluent sums UF + dialysate", () => {
@@ -112,4 +114,16 @@ test("FeNa, corrected Na/Ca, deficits", () => {
   const fwd = freeWaterDeficit({ na: 154, weightKg: 70, sex: "male" });
   assert.ok(Math.abs(fwd - 4.2) < 0.01);
   assert.equal(bicarbonateDeficit({ weightKg: 70, currentHco3: 12, desiredHco3: 24 }), 420);
+});
+
+test("recirculation (S−A)/(S−V)×100 with worked steps", () => {
+  // S=60, A=48, V=12 → (12)/(48)×100 = 25%
+  const pct = recirculationPct({ s: 60, a: 48, v: 12 });
+  assert.ok(Math.abs(pct - 25) < 0.01);
+  const worked = recirculationWorked({ s: 60, a: 48, v: 12 });
+  assert.equal(worked.numer, 12);
+  assert.equal(worked.denom, 48);
+  assert.ok(worked.steps.length >= 6);
+  assert.ok(worked.steps.some((s) => s.id === "pct"));
+  assert.equal(recirculationWorked({ s: 50, a: 40, v: 50 }).error != null, true);
 });

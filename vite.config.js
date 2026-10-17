@@ -27,7 +27,7 @@ export default defineConfig({
     strictPort: true,
   },
   define: {
-    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.5.1"),
+    "import.meta.env.VITE_APP_VERSION": JSON.stringify("2.6.0"),
   },
   build: {
     rollupOptions: {
@@ -41,6 +41,7 @@ export default defineConfig({
         dose: resolve(__dirname, "dose.html"),
         effluent: resolve(__dirname, "effluent.html"),
         filtration: resolve(__dirname, "filtration.html"),
+        recirculation: resolve(__dirname, "recirculation.html"),
         dilution: resolve(__dirname, "dilution.html"),
         citrate: resolve(__dirname, "citrate.html"),
         fluid: resolve(__dirname, "fluid.html"),

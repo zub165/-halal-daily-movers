@@ -2,7 +2,7 @@
 
 Clinical reference calculators for nephrology bedside work (ABG, osmolality, eGFR, FeNa, electrolytes) and Continuous Renal Replacement Therapy (CVVH / CVVHD / CVVHDF).
 
-**Version 2.5.1** — Polished clinical UI across hub + all calculators with distinct per-formula colors; nephrology bedside formulas plus CRRT tools; live formulas under each calculator; separate Halal Daily Movers page. Educational / protocol-support tool only. Not a medical device.
+**Version 2.6.0** — Multi-step recirculation calculator with saved step tape; polished clinical UI with per-formula colors; nephrology + CRRT tools. Educational / protocol-support tool only. Not a medical device.
 
 ## Apps in this repo
 | URL path | App |
@@ -24,6 +24,7 @@ Live Halal page: `https://zub165.github.io/-halal-daily-movers/halal.html`
 | `dose.html` | Dose = effluent ÷ weight |
 | `effluent.html` | Modality effluent + dose |
 | `filtration.html` | Filtration fraction |
+| `recirculation.html` | Access recirculation multi-step tape |
 | `dilution.html` | Dilution-corrected dose |
 | `citrate.html` | Citrate rate & Ca ratio |
 | `fluid.html` | Net fluid balance |

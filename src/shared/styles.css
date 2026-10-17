@@ -62,6 +62,7 @@ body[data-page="citrate"] { --page-accent: #c45c4a; --page-accent-soft: #fde6e1;
 body[data-page="fluid"] { --page-accent: #c97816; --page-accent-soft: #fcefd4; --page-accent-deep: #8f540b; }
 body[data-page="history"] { --page-accent: #2a6f97; --page-accent-soft: #dceaf4; --page-accent-deep: #1a4f6e; }
 body[data-page="privacy"] { --page-accent: #0f766e; --page-accent-soft: #d5f5f0; --page-accent-deep: #0a524c; }
+body[data-page="recirculation"] { --page-accent: #5b4d9a; --page-accent-soft: #e8e4f7; --page-accent-deep: #3d3470; }
 
 *,
 *::before,
@@ -711,6 +712,7 @@ textarea:focus {
 .tool-link--dilution { --tool: #0e8a8f; --tool-soft: #d4f4f5; }
 .tool-link--citrate { --tool: #c45c4a; --tool-soft: #fde6e1; }
 .tool-link--fluid { --tool: #c97816; --tool-soft: #fcefd4; }
+.tool-link--recirculation { --tool: #5b4d9a; --tool-soft: #e8e4f7; }
 
 .tool-link:nth-child(2) { animation-delay: 0.05s; }
 .tool-link:nth-child(3) { animation-delay: 0.1s; }
@@ -849,6 +851,183 @@ textarea:focus {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--ink-soft);
+}
+
+
+/* ── Multi-step / recirculation tape ─────────────────── */
+.calc-layout--wide {
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.var-legend {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin: -0.25rem 0 1rem;
+}
+
+.var-field label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.var-chip {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.55rem;
+  height: 1.55rem;
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0;
+}
+
+.var-field--s .var-chip { background: var(--fx-teal); }
+.var-field--a .var-chip { background: var(--fx-sea); }
+.var-field--v .var-chip { background: var(--fx-amber); }
+.var-field--s input:focus { border-color: var(--fx-teal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--fx-teal) 22%, transparent); }
+.var-field--a input:focus { border-color: var(--fx-sea); box-shadow: 0 0 0 3px color-mix(in srgb, var(--fx-sea) 22%, transparent); }
+.var-field--v input:focus { border-color: var(--fx-amber); box-shadow: 0 0 0 3px color-mix(in srgb, var(--fx-amber) 22%, transparent); }
+
+.equation-strip {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-weight: 600;
+  background: linear-gradient(160deg, #fff, var(--page-accent-soft));
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--page-accent);
+  color: var(--ink);
+}
+
+.equation-strip .op { color: var(--page-accent); margin: 0 0.2rem; }
+
+.step-tape-panel { margin-top: 1.15rem; }
+
+.tape-meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+.step-tape {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.step-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--fx);
+  background: linear-gradient(160deg, #fff, var(--fx-soft));
+  --fx: var(--fx-teal);
+  --fx-soft: var(--fx-teal-soft);
+}
+
+.step-tone-teal { --fx: var(--fx-teal); --fx-soft: var(--fx-teal-soft); }
+.step-tone-sea { --fx: var(--fx-sea); --fx-soft: var(--fx-sea-soft); }
+.step-tone-forest { --fx: var(--fx-forest); --fx-soft: var(--fx-forest-soft); }
+.step-tone-amber { --fx: var(--fx-amber); --fx-soft: var(--fx-amber-soft); }
+.step-tone-coral { --fx: var(--fx-coral); --fx-soft: var(--fx-coral-soft); }
+.step-tone-indigo { --fx: var(--fx-indigo); --fx-soft: var(--fx-indigo-soft); }
+
+.step-row--empty {
+  grid-template-columns: 1fr;
+  color: var(--mute);
+  font-size: 0.9rem;
+  background: var(--glass);
+  border-left-color: var(--line);
+}
+
+.step-row--error { outline: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+.step-row--pending { opacity: 0.75; }
+
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--fx);
+}
+
+.step-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fx);
+  margin-bottom: 0.15rem;
+}
+
+.step-expr {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.step-value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.step-tape--compact .step-row {
+  grid-template-columns: auto 1fr;
+  padding: 0.55rem 0.75rem;
+}
+
+.tape-history { margin-top: 1.25rem; }
+.tape-history__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.tape-run {
+  padding: 0.85rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.55);
+  margin-bottom: 0.75rem;
+}
+
+.tape-run__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.tape-run__head em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--page-accent-deep);
+}
+
+@media (max-width: 900px) {
+  .calc-layout--wide { grid-template-columns: 1fr; }
 }
 
 /* ── Formula panel (under calculators) ──────────────── */
